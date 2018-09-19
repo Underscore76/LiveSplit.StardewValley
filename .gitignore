@@ -1,0 +1,14 @@
+# folders with temporary objects
+.vs/
+bin/
+obj/
+packages/
+MemoryHelper/bin/
+MemoryHelper/obj/
+MemoryHelper/packages/
+
+# VS user config
+*.user
+
+# LiveSplit references, just reference the dlls that come with the LiveSplit software
+LiveSplit/

@@ -1,0 +1,51 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.StardewValley", "LiveSplit.StardewValley.csproj", "{156E236E-32FD-43EA-98D6-89195FAA641C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryHelper", "MemoryHelper\MemoryHelper.csproj", "{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|x64.ActiveCfg = Debug|x64
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|x64.Build.0 = Debug|x64
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|x86.ActiveCfg = Debug|x86
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Debug|x86.Build.0 = Debug|x86
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|x64.ActiveCfg = Release|x64
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|x64.Build.0 = Release|x64
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|x86.ActiveCfg = Release|x86
+		{156E236E-32FD-43EA-98D6-89195FAA641C}.Release|x86.Build.0 = Release|x86
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|x64.Build.0 = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|x64.Build.0 = Release|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7B54E4A-99FC-48DE-87C4-D884727D2759}
+	EndGlobalSection
+EndGlobal
