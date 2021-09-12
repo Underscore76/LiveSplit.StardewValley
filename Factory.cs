@@ -1,4 +1,4 @@
-using LiveSplit.Model;
+﻿using LiveSplit.Model;
 using LiveSplit.UI.Components;
 using System;
 using System.Reflection;
@@ -14,7 +14,7 @@ namespace LiveSplit.StardewValley
         public ComponentCategory Category => ComponentCategory.Control;
 
         public string UpdateName => Component.Name;
-        public string UpdateURL => "https://raw.githubusercontent.com/bluecheetah001/LiveSplit.StardewValley/master/Components/";
+        public string UpdateURL => "https://raw.githubusercontent.com/underscore76/LiveSplit.StardewValley/master/Components/";
         public string XMLURL => UpdateURL + "Updates.xml";
 
         public IComponent Create(LiveSplitState state)

@@ -1,4 +1,4 @@
-using Microsoft.Diagnostics.Runtime;
+﻿using Microsoft.Diagnostics.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,13 +11,16 @@ namespace MemoryHelper
         {
             ["1.2.6400.27469"] = MemoryModel.V2("1.2.33-steam"),
             ["1.3.6794.32951"] = MemoryModel.V3("1.3.28-steam"),
+            ["1.3.7114.34001"] = MemoryModel.V3("1.3.36-steam"),
+            ["1.3.7269.37809"] = MemoryModel.V3("1.4.0-steam"), // it's basically 1.3.36, so the signature is the same
             ["1.3.7853.31734"] = MemoryModel.V5("1.5.4-steam"),
         };
 
         public static void Main(string[] args)
         {
             Program program = new Program();
-            if (!program.TryAttach()) return;
+            if (!program.TryAttach())
+                return;
 
             Console.WriteLine("Computing field offsets...");
             foreach (var entry in program.Model.Fields)
@@ -139,59 +142,3 @@ namespace MemoryHelper
         }
     }
 }
-
-/*
- codeSignature: RemoveWhiteSpace(
-                    "0fb6 15 vvvvvvvv",
-                    "85d2",
-                    "0f85 ????????",
-                    "83 3d pppppppp 00")
-                );
- * 
- * 8B C6 A2 vvvvvvvv
- * FF 15 ????????
- * 85 C0
- * 74 10
- * FF 15 ????????
- * 8B C8
- * 8B 01
- * 8B 40 28
- * FF 50 18
- * 85 F6
- * 83 FE 03
- * 0F 84 ????????
- * 8D 65 F8
- * 5E
- * 5F
- * 5D
- * C3
- * 33 FF
- * 83 3D pppppppp 00
- * 74 3C
- * StardewValley.Game1::setGameMode+22 - 8B C6                
-StardewValley.Game1::setGameMode+24 - A2 1E703F03          
-StardewValley.Game1::setGameMode+29 - FF 15 3C37B205       
-StardewValley.Game1::setGameMode+2F - 85 C0                
-StardewValley.Game1::setGameMode+31 - 74 10                
-StardewValley.Game1::setGameMode+33 - FF 15 3C37B205       
-StardewValley.Game1::setGameMode+39 - 8B C8                
-StardewValley.Game1::setGameMode+3B - 8B 01                
-StardewValley.Game1::setGameMode+3D - 8B 40 28             
-StardewValley.Game1::setGameMode+40 - FF 50 18             
-StardewValley.Game1::setGameMode+43 - 85 F6                
-StardewValley.Game1::setGameMode+45 - 74 10                
-StardewValley.Game1::setGameMode+47 - 83 FE 03             
-StardewValley.Game1::setGameMode+4A - 0F84 A1000000        
-StardewValley.Game1::setGameMode+50 - 8D 65 F8             
-StardewValley.Game1::setGameMode+53 - 5E                   
-StardewValley.Game1::setGameMode+54 - 5F                   
-StardewValley.Game1::setGameMode+55 - 5D                   
-StardewValley.Game1::setGameMode+56 - C3                   
-StardewValley.Game1::setGameMode+57 - 33 FF                
-StardewValley.Game1::setGameMode+59 - 83 3D 68386904 00    
-StardewValley.Game1::setGameMode+60 - 74 3C                
-
- * 
- * 
- * 
- */

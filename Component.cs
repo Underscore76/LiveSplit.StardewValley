@@ -1,5 +1,4 @@
-using LiveSplit.Model;
-using LiveSplit.Options;
+﻿using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
 using System.Windows.Forms;
@@ -31,7 +30,6 @@ namespace LiveSplit.StardewValley
 
         public override XmlNode GetSettings(XmlDocument document)
         {
-            bool log = document.OuterXml != "";
             XmlElement parent = document.CreateElement("Settings");
             State.Settings.WriteXml(parent);
             return parent;
@@ -48,4 +46,3 @@ namespace LiveSplit.StardewValley
         }
     }
 }
-

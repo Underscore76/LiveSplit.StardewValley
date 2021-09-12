@@ -1,6 +1,7 @@
 ﻿using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
 using LiveSplit.Options;
+using LiveSplit.StardewValley.MemoryModels;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -99,9 +100,13 @@ namespace LiveSplit.StardewValley
                             Log.Info("[SDV] Attached to version 1.2.33-steam");
                             Memory = new MemoryModel_2(Process);
                             break;
-                        case "1.3.6794.32951":
-                            Log.Info("[SDV] Attached to version 1.3.28-steam");
+                        case "1.3.7114.34001":
+                            Log.Info("[SDV] Attached to version 1.3.36-steam");
                             Memory = new MemoryModel_3(Process);
+                            break;
+                        case "1.3.7269.37809":
+                            Log.Info("[SDV] Attached to version 1.4.0-steam");
+                            Memory = new MemoryModel_4(Process);
                             break;
                         case "1.3.7853.31734":
                             Log.Info("[SDV] Attached to version 1.5.4-steam");
