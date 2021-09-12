@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace LiveSplit.StardewValley.MemoryModels
 {
-    public class MemoryModel_4 : MemoryModel
+    public class MemoryModel_4_5 : MemoryModel
     {
         private static readonly string CodeSignature = RemoveWhitespace(
             "8B C6",
@@ -28,7 +28,7 @@ namespace LiveSplit.StardewValley.MemoryModels
             "33 FF",
             "83 3D pppppppp 00"); // _activeClickableMenu
 
-        public MemoryModel_4(Process process) : base(process, CodeSignature) { }
+        public MemoryModel_4_5(Process process) : base(process, CodeSignature) { }
 
         // Game1.game1._isSaving
         private readonly int[] SavingOffsets = { 104, 176 };
@@ -47,27 +47,27 @@ namespace LiveSplit.StardewValley.MemoryModels
         public override bool IsTitleMenu => (ReadValue<uint>(TitleMenu_StartupMessageColorOffsets) == TitleMenu_DeepSkyBlue);
 
         // Game1.options.zoomButttons
-        private readonly int[] EnableZoomOffsets = { 100, 185 };
+        private readonly int[] EnableZoomOffsets = { 100, 189 };
         public override void EnableZoomButton() { WriteValue<bool>(EnableZoomOffsets, true); }
 
         // Game1.options.ambientVolumeLevel
-        private readonly int[] AmbientVolumeOffsets = { 100, 136 };
+        private readonly int[] AmbientVolumeOffsets = { 100, 140 };
         public override void SetAmbientVolume(int level) { WriteValue<float>(AmbientVolumeOffsets, level / 100f); }
 
         // Game1.options.footstepVolumeLevel
-        private readonly int[] FootstepVolumeOffsets = { 100, 132 };
+        private readonly int[] FootstepVolumeOffsets = { 100, 136 };
         public override void SetFootstepVolume(int level) { WriteValue<float>(FootstepVolumeOffsets, level / 100f); }
 
         // Game1.options.musicVolumeLevel
-        private readonly int[] MusicVolumeOffsets = { 100, 120 };
+        private readonly int[] MusicVolumeOffsets = { 100, 124 };
         public override void SetMusicVolume(int level) { WriteValue<float>(MusicVolumeOffsets, level / 100f); }
 
         // Game1.options.soundVolumeLevel
-        private readonly int[] SoundVolumeOffsets = { 100, 124 };
+        private readonly int[] SoundVolumeOffsets = { 100, 128 };
         public override void SetSoundVolume(int level) { WriteValue<float>(SoundVolumeOffsets, level / 100f); }
 
         // Game1.options.alwaysShowToolHitLocation
-        private readonly int[] ToolHitOffsets = { 100, 176 };
+        private readonly int[] ToolHitOffsets = { 100, 180 };
         public override void ToolHitIndicator() { WriteValue<bool>(ToolHitOffsets, true); }
 
         // (Game1.netWorldState.value as NetWorldState).isPaused.value
@@ -84,7 +84,7 @@ namespace LiveSplit.StardewValley.MemoryModels
         public override void UnbindEmoteButton() { WriteValue<int>(EmoteButtonOffsets, AttentionKey); }
 
         // Game1.options.showAdvancedCraftingInformation
-        private readonly int[] AdvancedCraftingOffsets = { 100, 194 };
+        private readonly int[] AdvancedCraftingOffsets = { 100, 198 };
         public override void AdvancedCrafting() { WriteValue<bool>(AdvancedCraftingOffsets, true); }
 
         // not avalable in v1.4

@@ -13,6 +13,7 @@ namespace MemoryHelper
             ["1.3.6794.32951"] = MemoryModel.V3("1.3.28-steam"),
             ["1.3.7114.34001"] = MemoryModel.V3("1.3.36-steam"),
             ["1.3.7269.37809"] = MemoryModel.V3("1.4.0-steam"), // it's basically 1.3.36, so the signature is the same
+            ["1.3.7346.34283"] = MemoryModel.V3("1.4.5-steam"),
             ["1.3.7853.31734"] = MemoryModel.V5("1.5.4-steam"),
         };
 

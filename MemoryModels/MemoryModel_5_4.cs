@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace LiveSplit.StardewValley.MemoryModels
 {
-    public class MemoryModel_5 : MemoryModel
+    public class MemoryModel_5_4 : MemoryModel
     {
         private static readonly string CodeSignature = RemoveWhitespace(
             "8B C6",
@@ -28,7 +28,7 @@ namespace LiveSplit.StardewValley.MemoryModels
             "33 FF",
             "83 3D pppppppp 00", // _activeClickableMenu
             "74 3C");
-        public MemoryModel_5(Process process) : base(process, CodeSignature) { }
+        public MemoryModel_5_4(Process process) : base(process, CodeSignature) { }
 
         // netWorldState.(value as NetWorldState).isPaused.value]
         private readonly int[] PausedOffsets = { 108, 36, 60, 41 };

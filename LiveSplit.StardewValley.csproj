@@ -91,10 +91,11 @@
     <Compile Include="Component.cs" />
     <Compile Include="MemoryModel.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="MemoryModels\MemoryModel_4.cs" />
-    <Compile Include="MemoryModels\MemoryModel_3.cs" />
-    <Compile Include="MemoryModels\MemoryModel_2.cs" />
-    <Compile Include="MemoryModels\MemoryModel_5.cs" />
+    <Compile Include="MemoryModels\MemoryModel_4_5.cs" />
+    <Compile Include="MemoryModels\MemoryModel_4_0.cs" />
+    <Compile Include="MemoryModels\MemoryModel_3_36.cs" />
+    <Compile Include="MemoryModels\MemoryModel_2_33.cs" />
+    <Compile Include="MemoryModels\MemoryModel_5_4.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="State.cs" />
     <Compile Include="Settings.cs">
@@ -111,6 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Updates.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

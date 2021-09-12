@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace LiveSplit.StardewValley.MemoryModels
 {
-    public class MemoryModel_2 : MemoryModel
+    public class MemoryModel_2_33 : MemoryModel
     {
         private static readonly string CodeSignature = RemoveWhitespace(
             "8B C6",
@@ -21,7 +21,7 @@ namespace LiveSplit.StardewValley.MemoryModels
             "75 78",
             "83 3D pppppppp 00"); // _activeClickableMenu
 
-        public MemoryModel_2(Process process) : base(process, CodeSignature) { }
+        public MemoryModel_2_33(Process process) : base(process, CodeSignature) { }
 
         // Game1.game1._isSaving
         private readonly int[] SavingOffsets = { 100, 160 };
