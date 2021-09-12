@@ -4,9 +4,10 @@ A LiveSplit autosplitter component for Stardew Valley
 
 ## Features
 
+* [x] Able to add GLOBAL SETTINGS that are loaded on new game
 * [x] Remove inconsistent save times (when the white text is visible)
 * [x] Remove time while rebuilding graphics
-    * This is usually very quick, but is also done a lot in some glitches
+    * This is usually very quick, but is also done a lot in some glitches in old versions
 * [x] Remove time while the game is `\pause`d (introduced in 1.3+)
 * [ ] Automatically start the timer
 * [ ] Automatically split the timer at key events
@@ -15,12 +16,14 @@ A LiveSplit autosplitter component for Stardew Valley
 
 ### Version Support
 
-* [x] Support for version 1.3.* (latest is 1.3.28)
+* [x] Support for version 1.5.4
+* [x] Support for version 1.4.0
+* [x] Support for version 1.3.36
 * [x] Support for version 1.2.33
 * [ ] Support for version 1.11
 * [ ] Support for version 1.07
 * [x] Support for Steam
-* [ ] Support for other vensors (GOG)
+* [ ] Support for other vendors (GOG)
 
 ## Installing
 
