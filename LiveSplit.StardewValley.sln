@@ -1,11 +1,13 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2005
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveSplit.StardewValley", "LiveSplit.StardewValley.csproj", "{156E236E-32FD-43EA-98D6-89195FAA641C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryHelper", "MemoryHelper\MemoryHelper.csproj", "{CD461B9E-FC44-4A9B-88A7-AE9E88E5A0C5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{156E236E-32FD-43EA-98D6-89195FAA641C} = {156E236E-32FD-43EA-98D6-89195FAA641C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

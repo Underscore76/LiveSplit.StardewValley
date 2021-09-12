@@ -1,4 +1,4 @@
-using LiveSplit.ComponentUtil;
+﻿using LiveSplit.ComponentUtil;
 using LiveSplit.Model;
 using LiveSplit.Options;
 using System;
@@ -17,6 +17,8 @@ namespace LiveSplit.StardewValley
         private MemoryModel Memory;
 
         private TimerModel Timer;
+        private bool StartupTitleMenu;
+        private bool NeedsOverride;
 
         public State(LiveSplitState state)
         {
@@ -28,11 +30,12 @@ namespace LiveSplit.StardewValley
             state.OnStart += OnStart;
         }
 
-        // always use a game timer
         private void OnStart(object sender, EventArgs e)
         {
-            Timer.InitializeGameTime();
+            Timer.InitializeGameTime(); // trigger GameTime start
             Log.Info("[SDV] timer started");
+            StartupTitleMenu = Memory.IsTitleMenu;
+            NeedsOverride = Settings.EnableSettingsOverride;
         }
 
         public void Update()
@@ -52,6 +55,7 @@ namespace LiveSplit.StardewValley
                     }
                     break;
                 case TimerPhase.Running:
+                    if (!StartupTitleMenu) { OverrideSettings(); }
                     if (ShouldReset())
                     {
                         Timer.Reset();
@@ -99,6 +103,10 @@ namespace LiveSplit.StardewValley
                             Log.Info("[SDV] Attached to version 1.3.28-steam");
                             Memory = new MemoryModel_3(Process);
                             break;
+                        case "1.3.7853.31734":
+                            Log.Info("[SDV] Attached to version 1.5.4-steam");
+                            Memory = new MemoryModel_5(Process);
+                            break;
                     }
                     if (Memory == null)
                     {
@@ -116,9 +124,13 @@ namespace LiveSplit.StardewValley
 
         private bool IsLoading()
         {
+            // if someone reloads the title menu, we don't want to pause the timer
+            StartupTitleMenu &= Memory.IsTitleMenu;
+            if (StartupTitleMenu) return true;
+            if (Memory.NewDayTaskExists) return true;
+            if (Settings.RemoveRebuildGraphics && Memory.IsConstructingGraphics) return true;
             if (Settings.RemovePause && Memory.IsPaused) return true;
             if (Settings.RemoveSave && Memory.IsSaving) return true;
-            if (Settings.RemoveRebuildGraphics && Memory.IsConstructingGraphics) return true;
 
             return false;
         }
@@ -147,6 +159,12 @@ namespace LiveSplit.StardewValley
         public void Dispose()
         {
             Settings.Dispose();
+        }
+
+        public void OverrideSettings()
+        {
+            if (!NeedsOverride) return;
+            NeedsOverride = Settings.Override(Memory);
         }
     }
 }

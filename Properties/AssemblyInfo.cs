@@ -1,8 +1,8 @@
-using System.Reflection;
+﻿using LiveSplit.StardewValley;
 using LiveSplit.UI.Components;
-using LiveSplit.StardewValley;
+using System.Reflection;
 
 [assembly: AssemblyTitle("LiveSplit.StardewValley")]
-[assembly: AssemblyVersion("1.0.0")]
-[assembly: AssemblyFileVersion("1.0.0")]
+[assembly: AssemblyVersion("1.1.0")]
+[assembly: AssemblyFileVersion("1.1.0")]
 [assembly: ComponentFactory(typeof(Factory))]

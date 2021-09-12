@@ -1,4 +1,4 @@
-using Microsoft.Diagnostics.Runtime;
+﻿using Microsoft.Diagnostics.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,6 +132,7 @@ namespace MemoryHelper
             AsTypes.Add(type);
             return this;
         }
+
 
         public MemoryFinder GetValue<T>()
         {
