@@ -8,7 +8,7 @@ namespace LiveSplit.StardewValley
     public class Factory : IComponentFactory
     {
         public string ComponentName => Component.Name;
-        public string Description => "Auto Splitter for Stardew Valley";
+        public string Description => "Load Remover for Stardew Valley";
         public Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
         public ComponentCategory Category => ComponentCategory.Control;

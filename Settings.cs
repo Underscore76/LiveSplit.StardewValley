@@ -5,13 +5,6 @@ namespace LiveSplit.StardewValley
 {
     public partial class Settings : UserControl
     {
-        private const string RemovePause_name = "RemovePause";
-        public bool RemovePause
-        {
-            get { return RemovePause_box.Checked; }
-            set { RemovePause_box.Checked = value; }
-        }
-
         private const string RemoveSave_name = "RemoveSave";
         public bool RemoveSave
         {
@@ -111,7 +104,6 @@ namespace LiveSplit.StardewValley
         {
             InitializeComponent();
 
-            RemovePause = true;
             RemoveSave = true;
             RemoveRebuildGraphics = true;
             EnableSettingsOverride = true;
@@ -131,7 +123,6 @@ namespace LiveSplit.StardewValley
 
         public void WriteXml(XmlElement element)
         {
-            WriteBool(element, RemovePause_name, RemovePause);
             WriteBool(element, RemoveSave_name, RemoveSave);
             WriteBool(element, RemoveRebuildGraphics_name, RemoveRebuildGraphics);
             WriteBool(element, EnableSettingsOverride_name, EnableSettingsOverride);
@@ -151,7 +142,6 @@ namespace LiveSplit.StardewValley
 
         public void ReadXml(XmlElement element)
         {
-            RemovePause = ReadBool(element, RemovePause_name, RemovePause);
             RemoveSave = ReadBool(element, RemoveSave_name, RemoveSave);
             RemoveRebuildGraphics = ReadBool(element, RemoveRebuildGraphics_name, RemoveRebuildGraphics);
             EnableSettingsOverride = ReadBool(element, EnableSettingsOverride_name, EnableSettingsOverride);

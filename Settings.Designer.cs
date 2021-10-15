@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.RemovePause_box = new System.Windows.Forms.CheckBox();
             this.RemoveSave_box = new System.Windows.Forms.CheckBox();
             this.RemoveRebuildGraphics_box = new System.Windows.Forms.CheckBox();
             this.SettingsOverride = new System.Windows.Forms.GroupBox();
@@ -55,21 +54,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.MusicVolume)).BeginInit();
             this.SuspendLayout();
             // 
-            // RemovePause_box
-            // 
-            this.RemovePause_box.AutoSize = true;
-            this.RemovePause_box.Location = new System.Drawing.Point(6, 6);
-            this.RemovePause_box.Margin = new System.Windows.Forms.Padding(6);
-            this.RemovePause_box.Name = "RemovePause_box";
-            this.RemovePause_box.Size = new System.Drawing.Size(240, 29);
-            this.RemovePause_box.TabIndex = 1;
-            this.RemovePause_box.Text = "Remove /pause time";
-            this.RemovePause_box.UseVisualStyleBackColor = true;
-            // 
             // RemoveSave_box
             // 
             this.RemoveSave_box.AutoSize = true;
-            this.RemoveSave_box.Location = new System.Drawing.Point(6, 47);
+            this.RemoveSave_box.Location = new System.Drawing.Point(4, 18);
             this.RemoveSave_box.Margin = new System.Windows.Forms.Padding(6);
             this.RemoveSave_box.Name = "RemoveSave_box";
             this.RemoveSave_box.Size = new System.Drawing.Size(238, 29);
@@ -80,7 +68,7 @@
             // RemoveRebuildGraphics_box
             // 
             this.RemoveRebuildGraphics_box.AutoSize = true;
-            this.RemoveRebuildGraphics_box.Location = new System.Drawing.Point(6, 88);
+            this.RemoveRebuildGraphics_box.Location = new System.Drawing.Point(4, 59);
             this.RemoveRebuildGraphics_box.Margin = new System.Windows.Forms.Padding(6);
             this.RemoveRebuildGraphics_box.Name = "RemoveRebuildGraphics_box";
             this.RemoveRebuildGraphics_box.Size = new System.Drawing.Size(328, 29);
@@ -105,7 +93,7 @@
             this.SettingsOverride.Controls.Add(this.SoundVolume);
             this.SettingsOverride.Controls.Add(this.MusicVolumeLabel);
             this.SettingsOverride.Controls.Add(this.MusicVolume);
-            this.SettingsOverride.Location = new System.Drawing.Point(30, 164);
+            this.SettingsOverride.Location = new System.Drawing.Point(28, 135);
             this.SettingsOverride.Margin = new System.Windows.Forms.Padding(4);
             this.SettingsOverride.Name = "SettingsOverride";
             this.SettingsOverride.Padding = new System.Windows.Forms.Padding(4);
@@ -269,7 +257,7 @@
             // EnableSettingsOverride_box
             // 
             this.EnableSettingsOverride_box.AutoSize = true;
-            this.EnableSettingsOverride_box.Location = new System.Drawing.Point(6, 127);
+            this.EnableSettingsOverride_box.Location = new System.Drawing.Point(4, 98);
             this.EnableSettingsOverride_box.Margin = new System.Windows.Forms.Padding(4);
             this.EnableSettingsOverride_box.Name = "EnableSettingsOverride_box";
             this.EnableSettingsOverride_box.Size = new System.Drawing.Size(283, 29);
@@ -284,7 +272,6 @@
             this.Controls.Add(this.EnableSettingsOverride_box);
             this.Controls.Add(this.SettingsOverride);
             this.Controls.Add(this.RemoveRebuildGraphics_box);
-            this.Controls.Add(this.RemovePause_box);
             this.Controls.Add(this.RemoveSave_box);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Settings";
@@ -301,7 +288,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.CheckBox RemovePause_box;
         private System.Windows.Forms.CheckBox RemoveSave_box;
         private System.Windows.Forms.CheckBox RemoveRebuildGraphics_box;
         private System.Windows.Forms.GroupBox SettingsOverride;

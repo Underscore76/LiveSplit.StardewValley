@@ -138,7 +138,6 @@ namespace LiveSplit.StardewValley
             if (StartupTitleMenu) return true;
             if (Memory.NewDayTaskExists) return true;
             if (Settings.RemoveRebuildGraphics && Memory.IsConstructingGraphics) return true;
-            if (Settings.RemovePause && Memory.IsPaused) return true;
             if (Settings.RemoveSave && Memory.IsSaving) return true;
 
             return false;
