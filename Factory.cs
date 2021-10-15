@@ -14,8 +14,8 @@ namespace LiveSplit.StardewValley
         public ComponentCategory Category => ComponentCategory.Control;
 
         public string UpdateName => Component.Name;
-        public string UpdateURL => "https://raw.githubusercontent.com/underscore76/LiveSplit.StardewValley/master/Components/";
-        public string XMLURL => UpdateURL + "Updates.xml";
+        public string UpdateURL => "https://raw.githubusercontent.com/underscore76/LiveSplit.StardewValley/master/";
+        public string XMLURL => UpdateURL + "Components/Updates.xml";
 
         public IComponent Create(LiveSplitState state)
         {
