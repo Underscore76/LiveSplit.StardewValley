@@ -18,7 +18,7 @@ namespace MemoryHelper
             ValueType = valueType;
         }
 
-        public int[] FindOffsets(Program program, out string failure)
+        public Int64[] FindOffsets(Program program, out string failure)
         {
             ClrStaticField baseField = program.Game1.GetStaticFieldByName(Fields[0]);
             if (baseField == null)
@@ -34,8 +34,8 @@ namespace MemoryHelper
             }
             IntPtr referenceAddress = baseField.IsPrimitive ? program.SignatureValueAddress : program.SignaturePointerAddress;
 
-            List<int> offsets = new List<int>();
-            offsets.Add(baseAddress.ToInt32() - referenceAddress.ToInt32());
+            List<Int64> offsets = new List<Int64>();
+            offsets.Add(baseAddress.ToInt64() - referenceAddress.ToInt64());
 
             ClrField field = baseField;
             for (int i = 1; i < Fields.Length; i++)

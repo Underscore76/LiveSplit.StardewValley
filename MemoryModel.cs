@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Text;
+using LiveSplit.Options;
 
 namespace LiveSplit.StardewValley
 {
@@ -105,18 +106,23 @@ namespace LiveSplit.StardewValley
 
         private bool TryReadOffsets(bool isValue, int[] offsets, out IntPtr address)
         {
+
             if (isValue && offsets.Length == 1)
             {
+                //Log.Info(string.Format("[SDV] address: 0x{0}", ReferenceValueAddress.ToString("X")));
                 address = ReferenceValueAddress + offsets[0];
+                //Log.Info(string.Format("[SDV]       address: 0x{0}", address.ToString("X")));
                 return true;
             }
-
+            //Log.Info(string.Format("[SDV] address: 0x{0}", ReferencePointerAddress.ToString("X")));
             address = ReferencePointerAddress + offsets[0];
             for (int i = 1; i < offsets.Length; i++)
             {
+                //Log.Info(string.Format("[SDV]       address: 0x{0}", address.ToString("X")));
                 if (!Process.ReadPointer(address, out address)) return false;
                 address += offsets[i];
             }
+            //Log.Info(string.Format("[SDV]       address: 0x{0}", address.ToString("X")));
             return true;
         }
         // used in determining runtime

@@ -47,6 +47,7 @@
             this.MusicVolumeLabel = new System.Windows.Forms.Label();
             this.MusicVolume = new System.Windows.Forms.TrackBar();
             this.EnableSettingsOverride_box = new System.Windows.Forms.CheckBox();
+            this.UnbindLabel = new System.Windows.Forms.Label();
             this.SettingsOverride.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FootstepVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmbientVolume)).BeginInit();
@@ -78,6 +79,7 @@
             // 
             // SettingsOverride
             // 
+            this.SettingsOverride.Controls.Add(this.UnbindLabel);
             this.SettingsOverride.Controls.Add(this.UnbindChatButton_box);
             this.SettingsOverride.Controls.Add(this.UnbindEmoteButton_box);
             this.SettingsOverride.Controls.Add(this.SlingshotModeLabel);
@@ -105,7 +107,7 @@
             // UnbindChatButton_box
             // 
             this.UnbindChatButton_box.AutoSize = true;
-            this.UnbindChatButton_box.Location = new System.Drawing.Point(43, 597);
+            this.UnbindChatButton_box.Location = new System.Drawing.Point(43, 644);
             this.UnbindChatButton_box.Name = "UnbindChatButton_box";
             this.UnbindChatButton_box.Size = new System.Drawing.Size(453, 29);
             this.UnbindChatButton_box.TabIndex = 14;
@@ -115,7 +117,7 @@
             // UnbindEmoteButton_box
             // 
             this.UnbindEmoteButton_box.AutoSize = true;
-            this.UnbindEmoteButton_box.Location = new System.Drawing.Point(43, 562);
+            this.UnbindEmoteButton_box.Location = new System.Drawing.Point(43, 609);
             this.UnbindEmoteButton_box.Name = "UnbindEmoteButton_box";
             this.UnbindEmoteButton_box.Size = new System.Drawing.Size(247, 29);
             this.UnbindEmoteButton_box.TabIndex = 13;
@@ -265,6 +267,15 @@
             this.EnableSettingsOverride_box.Text = "Enable Settings Override";
             this.EnableSettingsOverride_box.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.UnbindLabel.AutoSize = true;
+            this.UnbindLabel.Location = new System.Drawing.Point(71, 571);
+            this.UnbindLabel.Name = "UnbindLabel";
+            this.UnbindLabel.Size = new System.Drawing.Size(338, 25);
+            this.UnbindLabel.TabIndex = 15;
+            this.UnbindLabel.Text = "Unbind Buttons (does not affect v1.5.5 or later)";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -307,5 +318,6 @@
         private System.Windows.Forms.Label SlingshotModeLabel;
         private System.Windows.Forms.CheckBox UnbindChatButton_box;
         private System.Windows.Forms.CheckBox UnbindEmoteButton_box;
+        private System.Windows.Forms.Label UnbindLabel;
     }
 }

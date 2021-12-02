@@ -15,6 +15,7 @@ namespace MemoryHelper
             ["1.3.7269.37809"] = MemoryModel.V3("1.4.0-steam"), // it's basically 1.3.36, so the signature is the same
             ["1.3.7346.34283"] = MemoryModel.V3("1.4.5-steam"),
             ["1.3.7853.31734"] = MemoryModel.V5("1.5.4-steam"),
+            ["1.3.37.0"] = MemoryModel.V5_5("1.5.5-steam"),
         };
 
         public static void Main(string[] args)
@@ -26,7 +27,7 @@ namespace MemoryHelper
             Console.WriteLine("Computing field offsets...");
             foreach (var entry in program.Model.Fields)
             {
-                int[] offsets = entry.Value.FindOffsets(program, out var failure);
+                Int64[] offsets = entry.Value.FindOffsets(program, out var failure);
                 if (offsets == null)
                 {
                     Console.WriteLine(entry.Key + " : " + failure);

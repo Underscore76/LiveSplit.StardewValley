@@ -213,8 +213,11 @@ namespace LiveSplit.StardewValley
             memory.SetFootstepVolume(FootstepVolumeLevel);
             memory.SetAmbientVolume(AmbientVolumeLevel);
 
-            if (UnbindEmoteButton) memory.UnbindEmoteButton();
-            if (UnbindChatButton) memory.UnbindChatButton();
+            if (!(memory is MemoryModels.MemoryModel_5_5))
+            {
+                if (UnbindEmoteButton) memory.UnbindEmoteButton();
+                if (UnbindChatButton) memory.UnbindChatButton();
+            }
             if (EnableZoomButton) memory.EnableZoomButton();
             if (AdvancedCrafting) memory.AdvancedCrafting();
             if (ToolHitButton) memory.ToolHitIndicator();

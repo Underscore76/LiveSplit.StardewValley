@@ -38,7 +38,7 @@ namespace MemoryHelper
 
         public string FileVersion => Process.MainModule.FileVersionInfo.FileVersion;
 
-        public const int ObjectHeaderSize = 4;
+        public static readonly int ObjectHeaderSize = IntPtr.Size;
 
         public ClrType GetTypeByName(string type)
         {
