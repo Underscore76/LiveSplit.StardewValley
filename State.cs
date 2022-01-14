@@ -120,6 +120,10 @@ namespace LiveSplit.StardewValley
                             Log.Info("[SDV] Attached to version 1.5.5-steam");
                             Memory = new MemoryModel_5_5(Process);
                             break;
+                        case "1.5.6.21356":
+                            Log.Info("[SDV] Attached to version 1.5.6-steam");
+                            Memory = new MemoryModel_5_6(Process);
+                            break;
                     }
                     if (Memory == null)
                     {
