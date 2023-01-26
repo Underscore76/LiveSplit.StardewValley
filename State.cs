@@ -51,7 +51,9 @@ namespace LiveSplit.StardewValley
                 return;
             }
 
+            // track that the title menu state changed
             WasStartupTitleMenu = StartupTitleMenu;
+            // if someone reloads the title menu, don't want to pause the timer
             StartupTitleMenu &= Memory.IsTitleMenu;
 
             switch (Timer.CurrentState.CurrentPhase)
@@ -154,8 +156,6 @@ namespace LiveSplit.StardewValley
 
         private bool IsLoading()
         {
-            // if someone reloads the title menu, we don't want to pause the timer
-
             //Log.Info(string.Format("[SDV] IsTitleMenu: {0}", Memory.IsTitleMenu));
             //Log.Info(string.Format("[SDV] NeweDayTaskExists: {0}", Memory.NewDayTaskExists));
             //Log.Info(string.Format("[SDV] IsSaving: {0}", Memory.IsSaving));
@@ -169,21 +169,17 @@ namespace LiveSplit.StardewValley
 
         private bool ShouldStart()
         {
-            // not sure yet how to detect being in the new game menu
             if (WasStartupTitleMenu) return !StartupTitleMenu;
             return false;
         }
 
         private bool ShouldSplit(MemoryModel memory)
         {
-            // nothing yet as i am not sure how to get/parse split data
             return SplitState.ShouldSplit(memory);
         }
 
         private bool ShouldReset()
         {
-            // not sure yet how to detect being in the new game menu
-
             return false;
         }
 
