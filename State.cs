@@ -53,7 +53,6 @@ namespace LiveSplit.StardewValley
 
             WasStartupTitleMenu = StartupTitleMenu;
             StartupTitleMenu &= Memory.IsTitleMenu;
-            Log.Info(string.Format("[SDV] IsTitleMenu: {0}\t{1}", WasStartupTitleMenu, StartupTitleMenu));
 
             switch (Timer.CurrentState.CurrentPhase)
             {
