@@ -5,6 +5,7 @@
       <file path="Components/LiveSplit.StardewValley.dll" statuc="changed"/>
       <changelog>
         <change>Added Splits tab to settings for autosplits!</change>
+        <change>Added auto start on OK click</change>
         <change>Added support for: Manual/DayStart/DayEnd/MinesFloor</change>
       </changelog>
     </files>
