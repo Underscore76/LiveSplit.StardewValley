@@ -103,6 +103,10 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.useLegacySlingshotFiring
         private readonly int[] SlingshotModeOffset = { 184, 80, 342 };
         public override void SlingshotMode(bool legacy) { WriteValue<bool>(SlingshotModeOffset, legacy); }
+
+        public override int DaysPlayed => 0;
+        public override string CurrentLocationName => "";
+        public override bool IsWeddingHearts => false;
     }
 }
 

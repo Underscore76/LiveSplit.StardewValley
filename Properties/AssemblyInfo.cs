@@ -3,6 +3,6 @@ using LiveSplit.UI.Components;
 using System.Reflection;
 
 [assembly: AssemblyTitle("LiveSplit.StardewValley")]
-[assembly: AssemblyVersion("1.2.5")]
-[assembly: AssemblyFileVersion("1.2.5")]
+[assembly: AssemblyVersion("1.3.0")]
+[assembly: AssemblyFileVersion("1.3.0")]
 [assembly: ComponentFactory(typeof(Factory))]

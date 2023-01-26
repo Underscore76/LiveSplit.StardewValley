@@ -1,4 +1,6 @@
-﻿namespace LiveSplit.StardewValley
+﻿using System;
+
+namespace LiveSplit.StardewValley
 {
     partial class Settings
     {
@@ -28,9 +30,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.RemoveSave_box = new System.Windows.Forms.CheckBox();
             this.RemoveRebuildGraphics_box = new System.Windows.Forms.CheckBox();
             this.SettingsOverride = new System.Windows.Forms.GroupBox();
+            this.UnbindLabel = new System.Windows.Forms.Label();
             this.UnbindChatButton_box = new System.Windows.Forms.CheckBox();
             this.UnbindEmoteButton_box = new System.Windows.Forms.CheckBox();
             this.SlingshotModeLabel = new System.Windows.Forms.Label();
@@ -47,12 +52,22 @@
             this.MusicVolumeLabel = new System.Windows.Forms.Label();
             this.MusicVolume = new System.Windows.Forms.TrackBar();
             this.EnableSettingsOverride_box = new System.Windows.Forms.CheckBox();
-            this.UnbindLabel = new System.Windows.Forms.Label();
+            this.splitAssignView = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SplitName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Trigger = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.TriggerValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SettingsOverride.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FootstepVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmbientVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SoundVolume)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MusicVolume)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitAssignView)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // RemoveSave_box
@@ -95,7 +110,7 @@
             this.SettingsOverride.Controls.Add(this.SoundVolume);
             this.SettingsOverride.Controls.Add(this.MusicVolumeLabel);
             this.SettingsOverride.Controls.Add(this.MusicVolume);
-            this.SettingsOverride.Location = new System.Drawing.Point(28, 135);
+            this.SettingsOverride.Location = new System.Drawing.Point(7, 7);
             this.SettingsOverride.Margin = new System.Windows.Forms.Padding(4);
             this.SettingsOverride.Name = "SettingsOverride";
             this.SettingsOverride.Padding = new System.Windows.Forms.Padding(4);
@@ -103,6 +118,15 @@
             this.SettingsOverride.TabIndex = 6;
             this.SettingsOverride.TabStop = false;
             this.SettingsOverride.Text = "Settings Override";
+            // 
+            // UnbindLabel
+            // 
+            this.UnbindLabel.AutoSize = true;
+            this.UnbindLabel.Location = new System.Drawing.Point(71, 571);
+            this.UnbindLabel.Name = "UnbindLabel";
+            this.UnbindLabel.Size = new System.Drawing.Size(459, 25);
+            this.UnbindLabel.TabIndex = 15;
+            this.UnbindLabel.Text = "Unbind Buttons (does not affect v1.5.5 or later)";
             // 
             // UnbindChatButton_box
             // 
@@ -267,32 +291,123 @@
             this.EnableSettingsOverride_box.Text = "Enable Settings Override";
             this.EnableSettingsOverride_box.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // splitAssignView
             // 
-            this.UnbindLabel.AutoSize = true;
-            this.UnbindLabel.Location = new System.Drawing.Point(71, 571);
-            this.UnbindLabel.Name = "UnbindLabel";
-            this.UnbindLabel.Size = new System.Drawing.Size(338, 25);
-            this.UnbindLabel.TabIndex = 15;
-            this.UnbindLabel.Text = "Unbind Buttons (does not affect v1.5.5 or later)";
+            this.splitAssignView.AllowUserToAddRows = false;
+            this.splitAssignView.AllowUserToDeleteRows = false;
+            this.splitAssignView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.splitAssignView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.splitAssignView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.splitAssignView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SplitName,
+            this.Trigger,
+            this.TriggerValue});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = "0";
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.splitAssignView.DefaultCellStyle = dataGridViewCellStyle2;
+            this.splitAssignView.Location = new System.Drawing.Point(3, 6);
+            this.splitAssignView.MultiSelect = false;
+            this.splitAssignView.Name = "splitAssignView";
+            this.splitAssignView.RowHeadersVisible = false;
+            this.splitAssignView.RowHeadersWidth = 82;
+            this.splitAssignView.RowTemplate.Height = 33;
+            this.splitAssignView.ShowEditingIcon = false;
+            this.splitAssignView.Size = new System.Drawing.Size(867, 769);
+            this.splitAssignView.TabIndex = 8;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(19, 134);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(892, 828);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
+            this.tabControl1.TabIndex = 9;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.SettingsOverride);
+            this.tabPage1.Location = new System.Drawing.Point(8, 39);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(876, 781);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Settings";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.splitAssignView);
+            this.tabPage2.Location = new System.Drawing.Point(8, 39);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(876, 781);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Splits";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // SplitName
+            // 
+            this.SplitName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SplitName.HeaderText = "Split Name";
+            this.SplitName.MinimumWidth = 40;
+            this.SplitName.Name = "SplitName";
+            this.SplitName.ReadOnly = true;
+            // 
+            // Trigger
+            // 
+            this.Trigger.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Trigger.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Trigger.HeaderText = "Trigger";
+            this.Trigger.MinimumWidth = 150;
+            this.Trigger.Name = "Trigger";
+            this.Trigger.Width = 150;
+            // 
+            // TriggerValue
+            // 
+            this.TriggerValue.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TriggerValue.HeaderText = "Day/Floor";
+            this.TriggerValue.MinimumWidth = 10;
+            this.TriggerValue.Name = "TriggerValue";
+            this.TriggerValue.Width = 150;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.EnableSettingsOverride_box);
-            this.Controls.Add(this.SettingsOverride);
             this.Controls.Add(this.RemoveRebuildGraphics_box);
             this.Controls.Add(this.RemoveSave_box);
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "Settings";
-            this.Size = new System.Drawing.Size(736, 1003);
+            this.Size = new System.Drawing.Size(940, 1003);
             this.SettingsOverride.ResumeLayout(false);
             this.SettingsOverride.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FootstepVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AmbientVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SoundVolume)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MusicVolume)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitAssignView)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -319,5 +434,12 @@
         private System.Windows.Forms.CheckBox UnbindChatButton_box;
         private System.Windows.Forms.CheckBox UnbindEmoteButton_box;
         private System.Windows.Forms.Label UnbindLabel;
+        private System.Windows.Forms.DataGridView splitAssignView;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SplitName;
+        private System.Windows.Forms.DataGridViewComboBoxColumn Trigger;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TriggerValue;
     }
 }

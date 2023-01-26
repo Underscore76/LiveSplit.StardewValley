@@ -92,12 +92,12 @@ namespace LiveSplit.StardewValley
             return defaultValue;
         }
 
-        public string ReadString(int[] offsets, string defaultValue = null)
+        public string ReadString(int[] offsets, string defaultValue = null, int ptrWidth = 4)
         {
             if (TryReadOffsets(false, offsets, out var address) &&
                 Process.ReadPointer(address, out address) &&
-                Process.ReadValue<int>(address + 4, out var len) &&
-                Process.ReadBytes(address + 8, len * 2, out var bytes))
+                Process.ReadValue<int>(address + ptrWidth, out var len) &&
+                Process.ReadBytes(address + ptrWidth + 4, len * 2, out var bytes))
             {
                 return Encoding.Unicode.GetString(bytes);
             }
@@ -132,6 +132,31 @@ namespace LiveSplit.StardewValley
         public abstract bool NewDayTaskExists { get; }
         public abstract bool IsTitleMenu { get; }
         protected readonly uint TitleMenu_DeepSkyBlue = 4294950656;
+
+        // split hook data
+        // Game1.stats.DaysPlayed
+        public abstract string CurrentLocationName { get; }
+        public abstract int DaysPlayed { get; }
+        // No clue yet
+        public int CurrentMinesFloor
+        {
+            get
+            {
+                string locName = CurrentLocationName;
+                if (locName == "" || !locName.StartsWith("UndergroundMine"))
+                {
+                    return -1;
+                }
+                if (Int32.TryParse(locName.Substring("UndergroundMine".Length), out int floor))
+                {
+                    return floor;
+                }
+                return -1;
+            }
+        }
+        // Game1.CurrentEvent != null && Game1.CurrentEvent.isWedding && Game1.CurrentEvent.CurrentCommand > 22
+        public abstract bool IsWeddingHearts { get; }
+
         // Settings
         public abstract void SetMusicVolume(int level);
         public abstract void SetSoundVolume(int level);

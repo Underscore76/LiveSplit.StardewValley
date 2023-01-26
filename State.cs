@@ -11,7 +11,7 @@ namespace LiveSplit.StardewValley
     public class State
     {
         public Settings Settings;
-
+        public SplitState SplitState;
         private const int ProcessScanInterval = 1000;
         private Stopwatch Stopwatch;
         private Process Process;
@@ -23,7 +23,8 @@ namespace LiveSplit.StardewValley
 
         public State(LiveSplitState state)
         {
-            Settings = new Settings();
+            SplitState = new SplitState(state);
+            Settings = new Settings(SplitState);
             Stopwatch = Stopwatch.StartNew();
             Process = null;
             Memory = null;
@@ -37,6 +38,7 @@ namespace LiveSplit.StardewValley
             Log.Info("[SDV] timer started");
             StartupTitleMenu = Memory.IsTitleMenu;
             NeedsOverride = Settings.EnableSettingsOverride;
+            SplitState.Reset();
         }
 
         public void Update()
@@ -61,7 +63,7 @@ namespace LiveSplit.StardewValley
                     {
                         Timer.Reset();
                     }
-                    else if (ShouldSplit())
+                    else if (ShouldSplit(Memory))
                     {
                         Timer.Split();
                     }
@@ -162,11 +164,10 @@ namespace LiveSplit.StardewValley
             return false;
         }
 
-        private bool ShouldSplit()
+        private bool ShouldSplit(MemoryModel memory)
         {
             // nothing yet as i am not sure how to get/parse split data
-
-            return false;
+            return SplitState.ShouldSplit(memory);
         }
 
         private bool ShouldReset()

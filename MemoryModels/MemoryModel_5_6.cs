@@ -103,6 +103,17 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.useLegacySlingshotFiring
         private readonly int[] SlingshotModeOffset = { 184, 80, 334 };
         public override void SlingshotMode(bool legacy) { WriteValue<bool>(SlingshotModeOffset, legacy); }
+
+        private readonly int[] CurrentLocationNameOffsets = { 184, 32, 272, 64 };
+        public override string CurrentLocationName => ReadString(CurrentLocationNameOffsets, "", 8);
+
+        // Game1.stats.DaysPlayed
+        private readonly int[] DaysPlayedOffsets = { -928, 496, 184 };
+        public override int DaysPlayed => (int)ReadValue<UInt32>(DaysPlayedOffsets);
+
+        public override bool IsWeddingHearts => false;
+        // No clue yet
+        // Game1.CurrentEvent != null && Game1.CurrentEvent.isWedding && Game1.CurrentEvent.CurrentCommand > 22
     }
 }
 
@@ -112,20 +123,20 @@ namespace LiveSplit.StardewValley.MemoryModels
 Scanning for Stardew Valley...
 Attaching to version 1.5.6-steam ( 1.5.6.21356 )...
 Computing field offsets...
-    IsPaused : ReadValue<Boolean>( 208, 64, 136, 69 )
-    IsSaving : ReadValue<Boolean>( 184, 182 )
-    IsConstructingGraphics : Failed to find field inDeviceTransition in type Microsoft.Xna.Framework.GraphicsDeviceManager
-    NewDayTask : ReadPointer( 264 )
-    ActiveClickableMenu : ReadPointer( 0 )
-    TitleMenu_StartupMessageColor : ReadValue<Int32>( 0, 456 )
-    Options.MusicVolume : ReadValue<Single>( 184, 80, 240 )
-    Options.SoundVolume : ReadValue<Single>( 184, 80, 244 )
-    Options.ambientVolumeLevel : ReadValue<Single>( 184, 80, 252 )
-    Options.footstepVolumeLevel : ReadValue<Single>( 184, 80, 248 )
+IsPaused : ReadValue<Boolean>( 208, 64, 136, 69 )
+IsSaving : ReadValue<Boolean>( 184, 182 )
+IsConstructingGraphics : Failed to find field inDeviceTransition in type Microsoft.Xna.Framework.GraphicsDeviceManager
+NewDayTask : ReadPointer( 264 )
+ActiveClickableMenu : ReadPointer( 0 )
+TitleMenu_StartupMessageColor : ReadValue<Int32>( 0, 456 )
+Options.MusicVolume : ReadValue<Single>( 184, 80, 240 )
+Options.SoundVolume : ReadValue<Single>( 184, 80, 244 )
+Options.ambientVolumeLevel : ReadValue<Single>( 184, 80, 252 )
+Options.footstepVolumeLevel : ReadValue<Single>( 184, 80, 248 )
 Options.emoteButton : ReadPointer( 184, 80, 216 )
 Optiions.ChatButtons : ReadPointer( 184, 80, 88 )
 Options.EnableZoom : ReadValue<Boolean>( 184, 80, 319 )
-    Options.ToolHit : ReadValue<Boolean>( 184, 80, 310 )
-    Options.AdvancedCraftnig : ReadValue<Boolean>( 184, 80, 324 )
-    Options.LegacySlingshot : ReadValue<Boolean>( 184, 80, 334 )
+Options.ToolHit : ReadValue<Boolean>( 184, 80, 310 )
+Options.AdvancedCraftnig : ReadValue<Boolean>( 184, 80, 324 )
+Options.LegacySlingshot : ReadValue<Boolean>( 184, 80, 334 )
 */

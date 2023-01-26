@@ -171,7 +171,7 @@ namespace MemoryHelper
                 .GetField("chatButton")
                 .GetValue<IntPtr>();
 
-            model.Fields["Options.AdvancedCraftnig"] = MemoryFinder
+            model.Fields["Options.AdvancedCrafting"] = MemoryFinder
                 .GetStaticField("options")
                 .GetField("showAdvancedCraftingInformation")
                 .GetValue<bool>();
@@ -281,7 +281,7 @@ namespace MemoryHelper
                 .GetField("instanceOptions")
                 .GetField("alwaysShowToolHitLocation")
                 .GetValue<bool>();
-            model.Fields["Options.AdvancedCraftnig"] = MemoryFinder
+            model.Fields["Options.AdvancedCrafting"] = MemoryFinder
                 .GetStaticField("game1")
                 .GetField("instanceOptions")
                 .GetField("showAdvancedCraftingInformation")
@@ -405,7 +405,7 @@ namespace MemoryHelper
                 .GetField("instanceOptions")
                 .GetField("alwaysShowToolHitLocation")
                 .GetValue<bool>();
-            model.Fields["Options.AdvancedCraftnig"] = MemoryFinder
+            model.Fields["Options.AdvancedCrafting"] = MemoryFinder
                 .GetStaticField("game1")
                 .GetField("instanceOptions")
                 .GetField("showAdvancedCraftingInformation")
@@ -415,6 +415,12 @@ namespace MemoryHelper
                 .GetField("instanceOptions")
                 .GetField("useLegacySlingshotFiring")
                 .GetValue<bool>();
+            model.Fields["currentLocation"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("name")
+                .GetField("value")
+                .GetValue<string>();
             return model;
         }
         public static MemoryModel V5_6(string gameVersion)
@@ -528,7 +534,7 @@ namespace MemoryHelper
                 .GetField("instanceOptions")
                 .GetField("alwaysShowToolHitLocation")
                 .GetValue<bool>();
-            model.Fields["Options.AdvancedCraftnig"] = MemoryFinder
+            model.Fields["Options.AdvancedCrafting"] = MemoryFinder
                 .GetStaticField("game1")
                 .GetField("instanceOptions")
                 .GetField("showAdvancedCraftingInformation")
@@ -538,6 +544,18 @@ namespace MemoryHelper
                 .GetField("instanceOptions")
                 .GetField("useLegacySlingshotFiring")
                 .GetValue<bool>();
+            model.Fields["currentLocation"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("name")
+                .AsType("Netcode.NetString")
+                .GetField("value")
+                .GetValue<string>();
+            model.Fields["DaysPlayed"] = MemoryFinder
+                .GetStaticField("_player")
+                .GetField("stats")
+                .GetField("daysPlayed")
+                .GetValue<uint>();
             return model;
         }
     }
