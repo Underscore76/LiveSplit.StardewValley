@@ -179,6 +179,57 @@ namespace MemoryHelper
                 .GetStaticField("options")
                 .GetField("emoteButton")
                 .GetValue<IntPtr>();
+            model.Fields["currentLocation"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .GetField("name")
+                .AsType("Netcode.NetString")
+                .GetField("value")
+                .GetValue<string>();
+            model.Fields["DaysPlayed"] = MemoryFinder
+                .GetStaticField("_player")
+                .GetField("stats")
+                .GetField("daysPlayed")
+                .GetValue<uint>();
+            model.Fields["CurrentEvent.IsWedding"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .GetField("currentEvent")
+                .GetField("isWedding")
+                .GetValue<bool>();
+            model.Fields["CurrentEvent.currnentCommand"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .GetField("currentEvent")
+                .GetField("currentCommand")
+                .GetValue<int>();
+            model.Fields["CurrentEvent.id"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .GetField("currentEvent")
+                .GetField("id")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaIndex"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaIndex")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaPhase"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaPhase")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaTimer"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaTimer")
+                .GetValue<int>();
+            model.Fields["CommunityCenter._isWatchingJunimoGoodbye"] = MemoryFinder
+                .GetStaticField("currentLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("_isWatchingJunimoGoodbye")
+                .GetValue<bool>();
+            model.Fields["ShopMenu.potraitPersonDialogue"] = MemoryFinder
+                .GetStaticField("_activeClickableMenu")
+                .AsType("StardewValley.Menus.ShopMenu")
+                .GetField("potraitPersonDialogue")
+                .GetValue<string>();
             return model;
         }
 

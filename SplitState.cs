@@ -140,7 +140,7 @@ namespace LiveSplit.StardewValley
                 CC_restoreAreaPhase = -1;
                 CC_isWatchingJunimoGoodbye = false;
             }
-            //Log.Info(string.Format("DaysPlayed: {0}\tCurrMaxFloor: {1}", currDay, currFloor));
+            //Log.Info(string.Format("[SDV]: CurrLoc:{0}\tIsCC:{1}\t[{2},{3},{4},{5}]", memory.CurrentLocationName, memory.IsCommunityCenter, CC_restoreAreaIndex, CC_restoreAreaPhase, CC_restoreAreaTimer, CC_isWatchingJunimoGoodbye));
             if (LastSplit != State.CurrentSplit.Name && !AlreadyRunSplits.Contains(State.CurrentSplit.Name))
             {
                 // implies that the CurrentSplit has changed and it's not already been checked

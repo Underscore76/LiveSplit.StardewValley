@@ -94,13 +94,17 @@ namespace LiveSplit.StardewValley
 
         public string ReadString(int[] offsets, string defaultValue = null, int ptrWidth = 4)
         {
-            if (TryReadOffsets(false, offsets, out var address) &&
-                Process.ReadPointer(address, out address) &&
-                Process.ReadValue<int>(address + ptrWidth, out var len) &&
-                Process.ReadBytes(address + ptrWidth + 4, len * 2, out var bytes))
+            try
             {
-                return Encoding.Unicode.GetString(bytes);
+                if (TryReadOffsets(false, offsets, out var address) &&
+                    Process.ReadPointer(address, out address) &&
+                    Process.ReadValue<int>(address + ptrWidth, out var len) &&
+                    Process.ReadBytes(address + ptrWidth + 4, len * 2, out var bytes))
+                {
+                    return Encoding.Unicode.GetString(bytes);
+                }
             }
+            catch { }
             return defaultValue;
         }
 
@@ -126,28 +130,28 @@ namespace LiveSplit.StardewValley
             return true;
         }
         // used in determining runtime
-        public virtual bool IsPaused { get; }
-        public virtual bool IsSaving { get; }
-        public virtual bool IsConstructingGraphics { get; }
-        public virtual bool NewDayTaskExists { get; }
-        public virtual bool IsTitleMenu { get; }
+        public virtual bool IsPaused => false;
+        public virtual bool IsSaving => false;
+        public virtual bool IsConstructingGraphics => false;
+        public virtual bool NewDayTaskExists => false;
+        public virtual bool IsTitleMenu => false;
         protected readonly uint TitleMenu_DeepSkyBlue = 4294950656;
 
         // split hook data
         // Game1.stats.DaysPlayed
-        public virtual string CurrentLocationName { get; }
-        public virtual string ShopMenu_PersonPortraitDialogue { get; }
-        public virtual int DaysPlayed { get { return -1; } }
+        public virtual string CurrentLocationName => "";
+        public virtual string ShopMenu_PersonPortraitDialogue => "";
+        public virtual int DaysPlayed => -1;
         public bool IsWeddingHearts => Event_IsWedding && Event_CurrentCommand > 22;
         public bool JojaVendingMachine => Event_EventId == 502261 && Event_CurrentCommand > 21;
-        public virtual bool Event_IsWedding { get; }
-        public virtual int Event_EventId { get { return -1; } }
-        public virtual int Event_CurrentCommand { get { return -1; } }
+        public virtual bool Event_IsWedding => false;
+        public virtual int Event_EventId => -1;
+        public virtual int Event_CurrentCommand => -1;
         public bool IsCommunityCenter => CurrentLocationName == "CommunityCenter";
-        public virtual bool CC_isWatchingJunimoGoodbye { get; }
-        public virtual int CC_restoreAreaIndex { get { return -1; } }
-        public virtual int CC_restoreAreaTimer { get { return -1; } }
-        public virtual int CC_restoreAreaPhase { get { return -1; } }
+        public virtual bool CC_isWatchingJunimoGoodbye => false;
+        public virtual int CC_restoreAreaIndex => -1;
+        public virtual int CC_restoreAreaTimer => -1;
+        public virtual int CC_restoreAreaPhase => -1;
         public int CurrentMinesFloor
         {
             get
