@@ -4,9 +4,11 @@
     <files>
       <file path="Components/LiveSplit.StardewValley.dll" statuc="changed"/>
       <changelog>
-        <change>Added Splits tab to settings for autosplits!</change>
+        <change>Added Splits tab to settings for autosplits</change>
         <change>Added auto start on OK click</change>
-        <change>Added support for: Manual/DayStart/DayEnd/MinesFloor</change>
+        <change>Added ability to tie triggers to specific splits</change>
+        <change>Only supported on current patch (v1.5.6HF#3) (looking to expand)</change>
+        <change>HatMouse currently only supported in English (looking to expand)</change>
       </changelog>
     </files>
   </update>

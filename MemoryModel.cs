@@ -126,18 +126,28 @@ namespace LiveSplit.StardewValley
             return true;
         }
         // used in determining runtime
-        public abstract bool IsPaused { get; }
-        public abstract bool IsSaving { get; }
-        public abstract bool IsConstructingGraphics { get; }
-        public abstract bool NewDayTaskExists { get; }
-        public abstract bool IsTitleMenu { get; }
+        public virtual bool IsPaused { get; }
+        public virtual bool IsSaving { get; }
+        public virtual bool IsConstructingGraphics { get; }
+        public virtual bool NewDayTaskExists { get; }
+        public virtual bool IsTitleMenu { get; }
         protected readonly uint TitleMenu_DeepSkyBlue = 4294950656;
 
         // split hook data
         // Game1.stats.DaysPlayed
-        public abstract string CurrentLocationName { get; }
-        public abstract int DaysPlayed { get; }
-        // No clue yet
+        public virtual string CurrentLocationName { get; }
+        public virtual string ShopMenu_PersonPortraitDialogue { get; }
+        public virtual int DaysPlayed { get { return -1; } }
+        public bool IsWeddingHearts => Event_IsWedding && Event_CurrentCommand > 22;
+        public bool JojaVendingMachine => Event_EventId == 502261 && Event_CurrentCommand > 21;
+        public virtual bool Event_IsWedding { get; }
+        public virtual int Event_EventId { get { return -1; } }
+        public virtual int Event_CurrentCommand { get { return -1; } }
+        public bool IsCommunityCenter => CurrentLocationName == "CommunityCenter";
+        public virtual bool CC_isWatchingJunimoGoodbye { get; }
+        public virtual int CC_restoreAreaIndex { get { return -1; } }
+        public virtual int CC_restoreAreaTimer { get { return -1; } }
+        public virtual int CC_restoreAreaPhase { get { return -1; } }
         public int CurrentMinesFloor
         {
             get
@@ -154,20 +164,18 @@ namespace LiveSplit.StardewValley
                 return -1;
             }
         }
-        // Game1.CurrentEvent != null && Game1.CurrentEvent.isWedding && Game1.CurrentEvent.CurrentCommand > 22
-        public abstract bool IsWeddingHearts { get; }
 
         // Settings
-        public abstract void SetMusicVolume(int level);
-        public abstract void SetSoundVolume(int level);
-        public abstract void SetFootstepVolume(int level);
-        public abstract void SetAmbientVolume(int level);
+        public virtual void SetMusicVolume(int level) { }
+        public virtual void SetSoundVolume(int level) { }
+        public virtual void SetFootstepVolume(int level) { }
+        public virtual void SetAmbientVolume(int level) { }
         public readonly int AttentionKey = 246;
-        public abstract void UnbindEmoteButton();
-        public abstract void UnbindChatButton();
-        public abstract void EnableZoomButton();
-        public abstract void AdvancedCrafting();
-        public abstract void ToolHitIndicator();
-        public abstract void SlingshotMode(bool legacy);
+        public virtual void UnbindEmoteButton() { }
+        public virtual void UnbindChatButton() { }
+        public virtual void EnableZoomButton() { }
+        public virtual void AdvancedCrafting() { }
+        public virtual void ToolHitIndicator() { }
+        public virtual void SlingshotMode(bool legacy) { }
     }
 }

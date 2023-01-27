@@ -107,13 +107,30 @@ namespace LiveSplit.StardewValley.MemoryModels
         private readonly int[] CurrentLocationNameOffsets = { 184, 32, 272, 64 };
         public override string CurrentLocationName => ReadString(CurrentLocationNameOffsets, "", 8);
 
-        // Game1.stats.DaysPlayed
         private readonly int[] DaysPlayedOffsets = { -928, 496, 184 };
         public override int DaysPlayed => (int)ReadValue<UInt32>(DaysPlayedOffsets);
 
-        public override bool IsWeddingHearts => false;
-        // No clue yet
-        // Game1.CurrentEvent != null && Game1.CurrentEvent.isWedding && Game1.CurrentEvent.CurrentCommand > 22
+        private readonly int[] Event_IsWeddingOffsets = { 184, 32, 400, 300 };
+        private readonly int[] Event_CurrentCommandOffsets = { 184, 32, 400, 232 };
+        private readonly int[] Event_EventIdOffsets = { 184, 32, 400, 264 };
+        public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
+        public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
+        public override int Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1);
+
+        private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { 184, 32, 680 };
+        public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaPhaseOffsets = { 184, 32, 684 };
+        public override int CC_restoreAreaPhase => ReadValue<int>(CommunityCenter_restoreAreaPhaseOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaIndexOffsets = { 184, 32, 688 };
+        public override int CC_restoreAreaIndex => ReadValue<int>(CommunityCenter_restoreAreaIndexOffsets);
+
+        private readonly int[] CommunityCenter_isWatchingJunimoGoodbyeOffsets = { 184, 32, 692 };
+        public override bool CC_isWatchingJunimoGoodbye => ReadValue<bool>(CommunityCenter_isWatchingJunimoGoodbyeOffsets);
+
+        private readonly int[] ShopMenu_PPDOffsets = { 0, 264 };
+        public override string ShopMenu_PersonPortraitDialogue => ReadString(ShopMenu_PPDOffsets, "", 8);
     }
 }
 

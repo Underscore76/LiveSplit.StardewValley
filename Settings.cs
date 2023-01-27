@@ -106,6 +106,20 @@ namespace LiveSplit.StardewValley
             set { SlingshotMode_dropdown.SelectedIndex = value; }
         }
 
+        private const string UseAutosplit_name = "UseAutosplit";
+        public bool UseAutosplit
+        {
+            get { return UseAutosplit_box.Checked; }
+            set { UseAutosplit_box.Checked = value; }
+        }
+        private const string StartOnOk_name = "StartOnOk";
+        public bool StartOnOk
+        {
+            get { return StartOnOk_box.Checked; }
+            set { StartOnOk_box.Checked = value; }
+        }
+
+
         private const string SplitState_Name = "SplitState";
         #endregion
 
@@ -131,7 +145,6 @@ namespace LiveSplit.StardewValley
             ToolHitButton = false;
             SlingshotMode = LEGACY_MODE;
             this.Load += Settings_Load;
-            //this.splitAssignView.CellContentClick += SplitAssignView_CellContentClick;
             this.splitAssignView.CellValueChanged += SplitAssignView_CellValueChanged;
 
             this.Trigger.ValueMember = "Value";
@@ -139,9 +152,11 @@ namespace LiveSplit.StardewValley
             var enumValues = Enum.GetValues(typeof(SplitTrigger)).OfType<SplitTrigger>().ToList();
             this.Trigger.MaxDropDownItems = enumValues.Count;
             this.Trigger.DataSource = enumValues.Select(value => new { Display = value.ToString(), Value = value }).ToList();
+            this.dayInput.ValueChanged += DayInput_ValueChanged;
+            this.seasonInput.SelectedValueChanged += SeasonInput_SelectedValueChanged;
+            this.seasonInput.SelectedIndex = 0;
+            this.yearInput.ValueChanged += YearInput_ValueChanged;
         }
-
-
 
         private void Settings_Load(object sender, System.EventArgs e)
         {
@@ -179,6 +194,9 @@ namespace LiveSplit.StardewValley
             WriteBool(element, AdvancedCrafting_name, AdvancedCrafting);
             WriteBool(element, ToolHitButton_name, ToolHitButton);
             WriteInt(element, SlingshotMode_name, SlingshotMode);
+
+            WriteBool(element, UseAutosplit_name, UseAutosplit);
+            WriteBool(element, StartOnOk_name, StartOnOk);
             WriteSplitState(element, SplitState_Name, State);
         }
 
@@ -199,6 +217,8 @@ namespace LiveSplit.StardewValley
             AdvancedCrafting = ReadBool(element, AdvancedCrafting_name, AdvancedCrafting);
             ToolHitButton = ReadBool(element, ToolHitButton_name, ToolHitButton);
             SlingshotMode = ReadInt(element, SlingshotMode_name, SlingshotMode);
+            UseAutosplit = ReadBool(element, UseAutosplit_name, UseAutosplit);
+            StartOnOk = ReadBool(element, StartOnOk_name, StartOnOk);
             ReadSplitState(element, SplitState_Name, State);
         }
 
@@ -333,6 +353,29 @@ namespace LiveSplit.StardewValley
                     }
                     break;
             }
+        }
+
+        private void SetActualDay()
+        {
+            int day = (int)this.dayInput.Value;
+            day += 28 * this.seasonInput.SelectedIndex;
+            day += 112 * ((int)this.yearInput.Value - 1);
+            this.actualDay.Text = day.ToString();
+        }
+
+        private void YearInput_ValueChanged(object sender, EventArgs e)
+        {
+            SetActualDay();
+        }
+
+        private void SeasonInput_SelectedValueChanged(object sender, EventArgs e)
+        {
+            SetActualDay();
+        }
+
+        private void DayInput_ValueChanged(object sender, EventArgs e)
+        {
+            SetActualDay();
         }
     }
 }

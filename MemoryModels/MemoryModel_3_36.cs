@@ -87,6 +87,5 @@ namespace LiveSplit.StardewValley.MemoryModels
 
         public override int DaysPlayed => 0;
         public override string CurrentLocationName => "";
-        public override bool IsWeddingHearts => false;
     }
 }

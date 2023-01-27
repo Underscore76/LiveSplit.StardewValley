@@ -169,13 +169,14 @@ namespace LiveSplit.StardewValley
 
         private bool ShouldStart()
         {
+            if (!Settings.StartOnOk) return false;
             if (WasStartupTitleMenu) return !StartupTitleMenu;
             return false;
         }
 
         private bool ShouldSplit(MemoryModel memory)
         {
-            return SplitState.ShouldSplit(memory);
+            return Settings.UseAutosplit && SplitState.ShouldSplit(memory);
         }
 
         private bool ShouldReset()
