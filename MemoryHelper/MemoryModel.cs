@@ -195,7 +195,7 @@ namespace MemoryHelper
                 .GetField("currentEvent")
                 .GetField("isWedding")
                 .GetValue<bool>();
-            model.Fields["CurrentEvent.currnentCommand"] = MemoryFinder
+            model.Fields["CurrentEvent.currentCommand"] = MemoryFinder
                 .GetStaticField("currentLocation")
                 .GetField("currentEvent")
                 .GetField("currentCommand")
@@ -613,7 +613,7 @@ namespace MemoryHelper
                 .GetField("currentEvent")
                 .GetField("isWedding")
                 .GetValue<bool>();
-            model.Fields["CurrentEvent.IsWedding"] = MemoryFinder
+            model.Fields["CurrentEvent.currentCommand"] = MemoryFinder
                 .GetStaticField("game1")
                 .GetField("instanceGameLocation")
                 .GetField("currentEvent")
@@ -641,7 +641,201 @@ namespace MemoryHelper
                 .GetStaticField("game1")
                 .GetField("instanceGameLocation")
                 .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaTimer")
+                .GetValue<int>();
+            model.Fields["CommunityCenter._isWatchingJunimoGoodbye"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("_isWatchingJunimoGoodbye")
+                .GetValue<bool>();
+            model.Fields["ShopMenu.potraitPersonDialogue"] = MemoryFinder
+                .GetStaticField("_activeClickableMenu")
+                .AsType("StardewValley.Menus.ShopMenu")
+                .GetField("potraitPersonDialogue")
+                .GetValue<string>();
+            return model;
+        }
+        public static MemoryModel V5_6_x86(string gameVersion)
+        {
+            MemoryModel model = new MemoryModel(
+                gameVersion: gameVersion,
+                signatureValue: "_gameMode",
+                signaturePointer: "_activeClickableMenu",
+                codeSignature: RemoveWhiteSpace( // Game1::setGameMode
+                    "55",        //- push ebp
+                    "8B EC",        //- mov ebp,esp
+                    "57",        //- push edi
+                    "56",        //- push esi
+                    "83 EC 08",        //- sub esp,08
+                    "8B 3D ????????",        //- mov edi,[055017EC]
+                    "0FB6 F1",        //- movzx esi,cl
+                    "8B CE",        //- mov ecx,esi
+                    "FF 15 ????????",        //- call dword ptr [06BD373C]
+                    "8B D0",        //- mov edx,eax
+                    "8B CF",        //- mov ecx,edi
+                    "E8 ????????",        //- call System.Console::WriteLine
+                    "8B C6",        //- mov eax,esi
+                    "A2 vvvvvvvv   ",        //- mov [02F47055],al
+                    "FF 15 ????????",        //- call dword ptr [06BD3754]
+                    "85 C0",        //- test eax,eax
+                    "74 10",        //- je StardewValley.Game1::setGameMode+43
+                    "FF 15 ????????",        //- call dword ptr [06BD3754]
+                    "8B C8",        //- mov ecx,eax
+                    "8B 01",        //- mov eax,[ecx]
+                    "8B 40 28",        //- mov eax,[eax+28]
+                    "FF 50 18",        //- call dword ptr [eax+18]
+                                       // case 0: jump to label case0
+                    "85 F6",         //- test esi,esi
+                    "74 10",         //- je StardewValley.Game1::setGameMode+57
+                    "83 FE 03",         //- cmp esi,03
+                    "0F84 A1000000",         //- je StardewValley.Game1::setGameMode+F1
+                    "8D 65 F8",         //- lea esp,[ebp-08]
+                    "5E",         //- pop esi
+                    "5F",         //- pop edi
+                    "5D",         //- pop ebp
+                    "C3",         //- ret 
+                                  // label: case0
+                    "33 FF",     // bool skip = false
+                    "83 3D pppppppp 00",     // activeClickableMenu == null
+                    "74 3C",     //- je StardewValley.Game1::setGameMode+9E
+                    "A1 ????????",     //- mov eax,[054F38BC]
+                    "85 C0",     //- test eax,eax
+                    "74 33",     //- je StardewValley.Game1::setGameMode+9E
+                    "3A 40 08",     //- cmp al,[eax+08]
+                    "8D 48 08",     //- lea ecx,[eax+08]
+                    "8B 01",     //- mov eax,[ecx]
+                    "8B 51 04"     //- mov edx,[ecx+04]
+                    )
+                );
+            model.Fields["IsPaused"] = MemoryFinder
+                .GetStaticField("netWorldState")
+                .GetField("value")
+                .AsType("StardewValley.Network.NetWorldState")
+                .GetField("isPaused")
+                .GetField("value")
+                .GetValue<bool>();
+            model.Fields["IsSaving"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("_isSaving")
+                .GetValue<bool>();
+            model.Fields["IsConstructingGraphics"] = MemoryFinder
+                .GetStaticField("graphics")
+                .GetField("inDeviceTransition")
+                .GetValue<bool>();
+            model.Fields["NewDayTask"] = MemoryFinder
+                .GetStaticField("_newDayTask")
+                .GetValue<IntPtr>();
+            model.Fields["ActiveClickableMenu"] = MemoryFinder
+                .GetStaticField("_activeClickableMenu")
+                .GetValue<IntPtr>();
+            model.Fields["TitleMenu_StartupMessageColor"] = MemoryFinder
+                .GetStaticField("_activeClickableMenu")
+                .AsType("StardewValley.Menus.TitleMenu")
+                .GetField("startupMessageColor")
+                .GetValue<int>();
+            model.Fields["Options.MusicVolume"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("musicVolumeLevel")
+                .GetValue<float>();
+            model.Fields["Options.SoundVolume"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("soundVolumeLevel")
+                .GetValue<float>();
+            model.Fields["Options.ambientVolumeLevel"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("ambientVolumeLevel")
+                .GetValue<float>();
+            model.Fields["Options.footstepVolumeLevel"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("footstepVolumeLevel")
+                .GetValue<float>();
+            model.Fields["Options.emoteButton"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("emoteButton")
+                .GetValue<IntPtr>();
+            model.Fields["Optiions.ChatButtons"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("chatButton")
+                .GetValue<IntPtr>();
+            model.Fields["Optiions.ChatButtons"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("chatButton")
+                .GetValue<IntPtr>();
+            model.Fields["Options.EnableZoom"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("zoomButtons")
+                .GetValue<bool>();
+            model.Fields["Options.ToolHit"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("alwaysShowToolHitLocation")
+                .GetValue<bool>();
+            model.Fields["Options.AdvancedCrafting"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("showAdvancedCraftingInformation")
+                .GetValue<bool>();
+            model.Fields["Options.LegacySlingshot"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceOptions")
+                .GetField("useLegacySlingshotFiring")
+                .GetValue<bool>();
+            model.Fields["currentLocation.Name"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("name")
+                .AsType("Netcode.NetString")
+                .GetField("value")
+                .GetValue<string>();
+            model.Fields["DaysPlayed"] = MemoryFinder
+                .GetStaticField("_player")
+                .GetField("stats")
+                .GetField("daysPlayed")
+                .GetValue<uint>();
+            model.Fields["CurrentEvent.IsWedding"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("currentEvent")
+                .GetField("isWedding")
+                .GetValue<bool>();
+            model.Fields["CurrentEvent.currentCommand"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("currentEvent")
+                .GetField("currentCommand")
+                .GetValue<int>();
+            model.Fields["CurrentEvent.id"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .GetField("currentEvent")
+                .GetField("id")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaIndex"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaIndex")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaPhase"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
                 .GetField("restoreAreaPhase")
+                .GetValue<int>();
+            model.Fields["CommunityCenter.restoreAreaTimer"] = MemoryFinder
+                .GetStaticField("game1")
+                .GetField("instanceGameLocation")
+                .AsType("StardewValley.Locations.CommunityCenter")
+                .GetField("restoreAreaTimer")
                 .GetValue<int>();
             model.Fields["CommunityCenter._isWatchingJunimoGoodbye"] = MemoryFinder
                 .GetStaticField("game1")
@@ -658,3 +852,44 @@ namespace MemoryHelper
         }
     }
 }
+
+/*
+ * 
+ * 
+
+
+"48 B8 vvvvvvvvvvvvvvvv", // _gameMode = mode
+                    "40 88 30",
+                    // if (temporaryContent != null) {
+                    "E8 ????????", // Game1::get_temporaryContent()
+                    "48 85 C0", // (temporaryContent == null)
+                    "74 12", // if above check true, jump
+                             // unload
+                    "E8 ????????", // Game1::get_temporaryContent()
+                    "48 8B C8",
+                    "48 8B 00",
+                    "48 8B 40 48",
+                    "FF 50 20",// temporaryContent.Unload()
+
+                    // } ENDIF
+                    // switch(mode)
+                    //  case 0 : jump to label 0x6D 
+                    "85 DB",
+                    "74 11",
+                    // case 3: jump to label 0x128 (not here)
+                    "83 FB 03",
+                    "0F84 ????????",
+                    //// otherwise return
+                    "48 83 C4 20",
+                    "5B",
+                    "5E",
+                    "5F",
+                    "C3",
+                    // label 0x6D
+                    "33 F6", // flag = false
+                    "48 B9 pppppppppppppppp", // the pointer to Game1._activeClickableMenu
+                    "48 83 39 00" // check it's not null
+                    )
+ * 
+ * 
+ */

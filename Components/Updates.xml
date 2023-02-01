@@ -7,8 +7,8 @@
         <change>Added Splits tab to settings for autosplits</change>
         <change>Added auto start on OK click</change>
         <change>Added ability to tie triggers to specific splits</change>
-        <change>Only supported on current patch (v1.5.6HF#3) (looking to expand)</change>
         <change>Added support for v1.5.6Hotfix#3 (current patch)</change>
+        <change>Added support for v1.5.6-Compatability Patch</change>
         <change>Added support for v1.4.0</change>
         <change>HatMouse currently only supported in English (looking to expand)</change>
       </changelog>

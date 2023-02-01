@@ -19,6 +19,7 @@ namespace MemoryHelper
             ["1.3.37.0"] = MemoryModel.V5_5("1.5.5-steam"),
             ["1.5.6.21356"] = MemoryModel.V5_5("1.5.6-steam"),
             ["1.5.6.22018"] = MemoryModel.V5_6("1.5.6-steam"),
+            ["1.3.8053.40424"] = MemoryModel.V5_6_x86("1.5.6-steam-compart"),
 
         };
 

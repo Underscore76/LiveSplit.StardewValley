@@ -93,7 +93,9 @@ namespace LiveSplit.StardewValley
             CC_restoreAreaPhase = -1;
             CC_isWatchingJunimoGoodbye = false;
             WeddingHearts = false;
+            JojaVendingMachine = false;
             HatMouse = false;
+            LastSplit = "";
             AlreadyRunSplits.Clear();
         }
 
@@ -171,17 +173,17 @@ namespace LiveSplit.StardewValley
                 case SplitTrigger.Marriage:
                     return WeddingHearts;
                 case SplitTrigger.Pantry:
-                    return CC_restoreAreaIndex == 0 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 0 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.Crafts:
-                    return CC_restoreAreaIndex == 1 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 1 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.FishTank:
-                    return CC_restoreAreaIndex == 2 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 2 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.BoilerRoom:
-                    return CC_restoreAreaIndex == 3 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 3 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.Vault:
-                    return CC_restoreAreaIndex == 4 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 4 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.BulletinBoard:
-                    return CC_restoreAreaIndex == 5 && CC_restoreAreaPhase == 3;
+                    return CC_restoreAreaIndex == 5 && CC_restoreAreaPhase == 3 && CC_restoreAreaTimer > 0;
                 case SplitTrigger.CC:
                     return CC_restoreAreaPhase == 3 && CC_isWatchingJunimoGoodbye && CC_restoreAreaTimer > 0;
                 case SplitTrigger.Joja:
