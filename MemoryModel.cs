@@ -147,27 +147,10 @@ namespace LiveSplit.StardewValley
         public virtual bool Event_IsWedding => false;
         public virtual int Event_EventId => -1;
         public virtual int Event_CurrentCommand => -1;
-        public bool IsCommunityCenter => CurrentLocationName == "CommunityCenter";
         public virtual bool CC_isWatchingJunimoGoodbye => false;
         public virtual int CC_restoreAreaIndex => -1;
         public virtual int CC_restoreAreaTimer => -1;
         public virtual int CC_restoreAreaPhase => -1;
-        public int CurrentMinesFloor
-        {
-            get
-            {
-                string locName = CurrentLocationName;
-                if (locName == "" || !locName.StartsWith("UndergroundMine"))
-                {
-                    return -1;
-                }
-                if (Int32.TryParse(locName.Substring("UndergroundMine".Length), out int floor))
-                {
-                    return floor;
-                }
-                return -1;
-            }
-        }
 
         // Settings
         public virtual void SetMusicVolume(int level) { }

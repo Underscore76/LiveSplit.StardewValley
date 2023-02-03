@@ -49,6 +49,7 @@ namespace LiveSplit.StardewValley
         public bool JojaVendingMachine;
         public bool HatMouse;
         public string LastSplit;
+        public string CurrentLocationName;
 
         public SplitState(LiveSplitState state)
         {
@@ -121,14 +122,42 @@ namespace LiveSplit.StardewValley
 
         public void Update(MemoryModel memory)
         {
-            lastFloor = currFloor;
+            CurrentLocationName = memory.CurrentLocationName;
+            // handle day changes
             lastDay = currDay;
-            if (!WeddingHearts) WeddingHearts = memory.IsWeddingHearts;
-            if (!JojaVendingMachine) JojaVendingMachine = memory.JojaVendingMachine;
-            if (!HatMouse) HatMouse = memory.ShopMenu_PersonPortraitDialogue.Contains("Hiyo, poke.");
-            currFloor = Math.Max(currFloor, memory.CurrentMinesFloor);
             currDay = Math.Max(currDay, memory.DaysPlayed);
-            if (memory.IsCommunityCenter)
+
+            // handle mines floor changes
+            lastFloor = currFloor;
+            if (CurrentLocationName.StartsWith("UndergroundMine"))
+            {
+                if (Int32.TryParse(CurrentLocationName.Substring("UndergroundMine".Length), out int floor))
+                {
+                    currFloor = Math.Max(currFloor, floor);
+                }
+            }
+
+            // town events
+            if (CurrentLocationName == "Town")
+            {
+                if (!WeddingHearts)
+                {
+                    WeddingHearts = memory.IsWeddingHearts;
+                }
+                if (!JojaVendingMachine)
+                {
+                    JojaVendingMachine = memory.JojaVendingMachine;
+                }
+            }
+
+            // Hiyo, poke!
+            if (CurrentLocationName == "Forest" && !HatMouse)
+            {
+                HatMouse = memory.ShopMenu_PersonPortraitDialogue.Contains("Hiyo, poke.");
+            }
+
+            // CC bundles
+            if (CurrentLocationName == "CommunityCenter")
             {
                 CC_restoreAreaTimer = memory.CC_restoreAreaTimer;
                 CC_restoreAreaIndex = memory.CC_restoreAreaIndex;
@@ -142,6 +171,7 @@ namespace LiveSplit.StardewValley
                 CC_restoreAreaPhase = -1;
                 CC_isWatchingJunimoGoodbye = false;
             }
+
             //Log.Info(string.Format("[SDV]: CurrLoc:{0}\tIsCC:{1}\t[{2},{3},{4},{5}]", memory.CurrentLocationName, memory.IsCommunityCenter, CC_restoreAreaIndex, CC_restoreAreaPhase, CC_restoreAreaTimer, CC_isWatchingJunimoGoodbye));
             if (LastSplit != State.CurrentSplit.Name && !AlreadyRunSplits.Contains(State.CurrentSplit.Name))
             {
