@@ -9,9 +9,9 @@ A LiveSplit autosplitter component for Stardew Valley
 * [x] Remove time while rebuilding graphics
     * This is usually very quick, but is also done a lot in some glitches in old versions
 * [x] Remove time while the game is `\pause`d (introduced in 1.3+)
-* [ ] Automatically start the timer
-* [ ] Automatically split the timer at key events
-* [ ] Automatically stop the timer at run end
+* [X] Automatically start the timer
+* [X] Automatically split the timer at key events
+* [X] Automatically stop the timer at run end
 * [ ] Automatically reset the timer when starting a new run
 
 ### Version Support
