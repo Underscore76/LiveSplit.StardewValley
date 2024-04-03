@@ -26,6 +26,7 @@ namespace LiveSplit.StardewValley
 
         public void ScanAgain()
         {
+            Log.Info("[SDV] Rescanning for code signature");
             int pointerIndex = CodeSignature.IndexOf('p') / 2;
             int valueIndex = CodeSignature.IndexOf('v') / 2;
 
@@ -34,6 +35,7 @@ namespace LiveSplit.StardewValley
             {
                 ReferencePointerAddress = Process.ReadPointer(codeLocation + pointerIndex);
                 ReferenceValueAddress = Process.ReadPointer(codeLocation + valueIndex);
+                Log.Info("[SDV] Found code location");
             }
         }
 

@@ -18,6 +18,7 @@ namespace MemoryHelper
             ["1.3.37.0"] = MemoryModel.V5_5("1.5.5-steam"),
             ["1.5.6.21356"] = MemoryModel.V5_5("1.5.6-steam"),
             ["1.5.6.22018"] = MemoryModel.V5_5("1.5.6-steam"),
+            ["1.6.3.24087"] = MemoryModel.V6_3("1.6.3-steam"),
 
         };
 
@@ -81,10 +82,10 @@ namespace MemoryHelper
             {
                 Console.WriteLine("Failed to find signature value " + Model.SignatureValue);
             }
-            else if (!signatureValue.IsPrimitive)
-            {
-                Console.WriteLine("Signature " + Model.SignatureValue + " is not a value");
-            }
+            //else if (!signatureValue.IsPrimitive)
+            //{
+            //    Console.WriteLine("Signature " + Model.SignatureValue + " is not a value");
+            //}
             else
             {
                 SignatureValueAddress = Scanner.GetAddress(signatureValue);
@@ -113,7 +114,8 @@ namespace MemoryHelper
             {
                 return false;
             }
-
+            Console.WriteLine($"{SignaturePointerAddress.ToString("x")} {SignatureValueAddress.ToString("x")}");
+            return true;
             int valueIndex = Model.CodeSignature.IndexOf('v') / 2;
             int pointerIndex = Model.CodeSignature.IndexOf('p') / 2;
             int hits = 0;
