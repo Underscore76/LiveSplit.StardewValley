@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiveSplit.Options;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace LiveSplit.StardewValley.MemoryModels
                     "74 05",
                     "BE 01000000"
                     );
-        public MemoryModel_6_3(Process process) : base(process, CodeSignature) { 
+        public MemoryModel_6_3(Process process) : base(process, CodeSignature) {
         }
 
         // netWorldState.(value as NetWorldState).isPaused.value]
@@ -81,13 +82,13 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.emoteButton
         private readonly int[] EmoteButtonOffsets = { 184, 80, 216, 8 };
         public string EmoteAddress => ReadValue<IntPtr>(new int[] { 184, 80, 216 }).ToString("X");
-        public override void UnbindEmoteButton() { WriteValue<int>(EmoteButtonOffsets, AttentionKey); }
+        public override void UnbindEmoteButton() {}
 
         // Game1.options.chatButton
         // the SECOND offset would be at 10, I'm not exactly sure I understand why
         private readonly int[] ChatButtonOffsets = { 184, 80, 88, 8 };
         public string ChatAddress => ReadValue<IntPtr>(new int[] { 184, 80, 88 }).ToString("X");
-        public override void UnbindChatButton() { WriteValue<int>(ChatButtonOffsets, AttentionKey); }
+        public override void UnbindChatButton() {}
 
         // Game1.options.enableZoom
         private readonly int[] EnableZoomOffsets = { 184, 80, 314 };
@@ -104,5 +105,69 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.useLegacySlingshotFiring
         private readonly int[] SlingshotModeOffset = { 184, 80, 330 };
         public override void SlingshotMode(bool legacy) { WriteValue<bool>(SlingshotModeOffset, legacy); }
+
+
+        private readonly int[] CurrentLocationNameOffsets = { 184, 32, 352, 72 };
+        public override string CurrentLocationName => ReadString(CurrentLocationNameOffsets, "", 8);
+
+        private readonly int[] DaysPlayedOffsets = { 216, 72, 120, 76 };
+        public override int DaysPlayed => ReadValue<int>(DaysPlayedOffsets, -1);
+
+        private readonly int[] Event_IsWeddingOffsets = { 184, 32, 472, 297 };
+        private readonly int[] Event_CurrentCommandOffsets = { 184, 32, 472, 256 };
+        private readonly int[] Event_EventIdOffsets = { 184, 32, 472, 16 };
+        public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
+        public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
+        public override string Event_EventId => ReadString(Event_EventIdOffsets, "-1", 8);
+
+        private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { 184, 32, 836 };
+        public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaPhaseOffsets = { 184, 32, 840 };
+        public override int CC_restoreAreaPhase => ReadValue<int>(CommunityCenter_restoreAreaPhaseOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaIndexOffsets = { 184, 32, 844 };
+        public override int CC_restoreAreaIndex => ReadValue<int>(CommunityCenter_restoreAreaIndexOffsets);
+
+        private readonly int[] CommunityCenter_isWatchingJunimoGoodbyeOffsets = { 184, 32, 848 };
+        public override bool CC_isWatchingJunimoGoodbye => ReadValue<bool>(CommunityCenter_isWatchingJunimoGoodbyeOffsets);
+
+        private readonly int[] ShopMenu_PPDOffsets = { 0, 272 };
+        public override string ShopMenu_PersonPortraitDialogue => ReadString(ShopMenu_PPDOffsets, "", 8);
+
+        private readonly int[] Farm_grandpaScoreOffsets = { 184, 32, 720, 76 };
+        public override int Farm_grandpaScore => ReadValue<int>(Farm_grandpaScoreOffsets, 0);
     }
 }
+
+/*
+Attaching to version 1.6.3-steam ( 1.6.3.24087 )...
+Computing field offsets...
+IsPaused : ReadValue<Boolean>( 216, 72, 136, 77 )
+IsSaving : ReadValue<Boolean>( 184, 169 )
+IsConstructingGraphics : Failed to find field inDeviceTransition in type Microsoft.Xna.Framework.GraphicsDeviceManager
+NewDayTask : ReadPointer( 272 )
+ActiveClickableMenu : ReadPointer( 0 )
+TitleMenu_StartupMessageColor : ReadValue<Int32>( 0, 456 )
+Options.MusicVolume : ReadValue<Single>( 184, 80, 240 )
+Options.SoundVolume : ReadValue<Single>( 184, 80, 244 )
+Options.ambientVolumeLevel : ReadValue<Single>( 184, 80, 252 )
+Options.footstepVolumeLevel : ReadValue<Single>( 184, 80, 248 )
+Options.emoteButton : ReadPointer( 184, 80, 216 )
+Optiions.ChatButtons : ReadPointer( 184, 80, 88 )
+Options.EnableZoom : ReadValue<Boolean>( 184, 80, 314 )
+Options.ToolHit : ReadValue<Boolean>( 184, 80, 306 )
+Options.AdvancedCraftnig : ReadValue<Boolean>( 184, 80, 319 )
+Options.LegacySlingshot : ReadValue<Boolean>( 184, 80, 330 )
+currentLocation.Name : ReadString( 184, 32, 352, 72, 0 )
+DaysPlayed : ReadValue<Int32>( 216, 72, 120, 76 )
+CurrentEvent.IsWedding : ReadValue<Boolean>( 184, 32, 472, 297 )
+CurrentEvent.currentCommand : ReadValue<Int32>( 184, 32, 472, 256 )
+CurrentEvent.id : ReadValue<Int32>( 184, 32, 472, 16 )
+CommunityCenter.restoreAreaIndex : ReadValue<Int32>( 184, 32, 844 )
+CommunityCenter.restoreAreaPhase : ReadValue<Int32>( 184, 32, 840 )
+CommunityCenter.restoreAreaTimer : ReadValue<Int32>( 184, 32, 836 )
+CommunityCenter._isWatchingJunimoGoodbye : ReadValue<Boolean>( 184, 32, 848 )
+ShopMenu.potraitPersonDialogue : ReadString( 0, 272, 0 )
+Farm.grandpaScore.Value : ReadValue<Int32>( 184, 32, 720, 76 )
+ */

@@ -92,13 +92,13 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.emoteButton
         private readonly int[] EmoteButtonOffsets = { 92, 40, 108, 8 };
         public string EmoteAddress => ReadValue<IntPtr>(new int[] { 92, 40, 108 }).ToString("X");
-        public override void UnbindEmoteButton() { WriteValue<int>(EmoteButtonOffsets, AttentionKey); }
+        public override void UnbindEmoteButton() {}
 
         // Game1.options.chatButton
         // the SECOND offset would be at 10, I'm not exactly sure I understand why
         private readonly int[] ChatButtonOffsets = { 92, 40, 44, 8 };
         public string ChatAddress => ReadValue<IntPtr>(new int[] { 92, 40, 44 }).ToString("X");
-        public override void UnbindChatButton() { WriteValue<int>(ChatButtonOffsets, AttentionKey); }
+        public override void UnbindChatButton() {}
 
         // Game1.options.enableZoom
         private readonly int[] EnableZoomOffsets = { 92, 40, 203 };
@@ -127,7 +127,7 @@ namespace LiveSplit.StardewValley.MemoryModels
         private readonly int[] Event_EventIdOffsets = { 92, 16, 200, 148 };
         public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
         public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
-        public override int Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1);
+        public override string Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1).ToString();
 
         private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { 92, 16, 372 };
         public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);

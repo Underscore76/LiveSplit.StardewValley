@@ -80,13 +80,13 @@ namespace LiveSplit.StardewValley.MemoryModels
         // Game1.options.emoteButton
         private readonly int[] EmoteButtonOffsets = { 184, 80, 224, 8 };
         public string EmoteAddress => ReadValue<IntPtr>(new int[] { 184, 80, 224 }).ToString("X");
-        public override void UnbindEmoteButton() { WriteValue<int>(EmoteButtonOffsets, AttentionKey); }
+        public override void UnbindEmoteButton() {}
 
         // Game1.options.chatButton
         // the SECOND offset would be at 10, I'm not exactly sure I understand why
         private readonly int[] ChatButtonOffsets = { 184, 80, 96, 8 };
         public string ChatAddress => ReadValue<IntPtr>(new int[] { 184, 80, 96 }).ToString("X");
-        public override void UnbindChatButton() { WriteValue<int>(ChatButtonOffsets, AttentionKey); }
+        public override void UnbindChatButton() {}
 
         // Game1.options.enableZoom
         private readonly int[] EnableZoomOffsets = { 184, 80, 327 };

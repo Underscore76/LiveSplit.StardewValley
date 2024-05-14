@@ -23,6 +23,7 @@ namespace LiveSplit.StardewValley
         CC,
         Joja,
         HatMouse,
+        FourCandles,
     }
     public class SplitHook
     {
@@ -50,6 +51,7 @@ namespace LiveSplit.StardewValley
         public bool HatMouse;
         public string LastSplit;
         public string CurrentLocationName;
+        public int GrandpaScore;
 
         public SplitState(LiveSplitState state)
         {
@@ -93,6 +95,7 @@ namespace LiveSplit.StardewValley
             CC_restoreAreaIndex = -1;
             CC_restoreAreaPhase = -1;
             CC_isWatchingJunimoGoodbye = false;
+            GrandpaScore = 0;
             WeddingHearts = false;
             JojaVendingMachine = false;
             HatMouse = false;
@@ -126,7 +129,7 @@ namespace LiveSplit.StardewValley
             // handle day changes
             lastDay = currDay;
             currDay = Math.Max(currDay, memory.DaysPlayed);
-
+            //Log.Info($"[SDV] {CurrentLocationName} {currDay}");
             // handle mines floor changes
             lastFloor = currFloor;
             if (CurrentLocationName.StartsWith("UndergroundMine"))
@@ -150,9 +153,16 @@ namespace LiveSplit.StardewValley
                 }
             }
 
+            if (CurrentLocationName == "Farm")
+            {
+                if (GrandpaScore < 4)
+                    GrandpaScore = memory.Farm_grandpaScore;
+            }
+
             // Hiyo, poke!
             if (CurrentLocationName == "Forest" && !HatMouse)
             {
+                //Log.Info($"[SDV] {memory.ShopMenu_PersonPortraitDialogue}");
                 HatMouse = memory.ShopMenu_PersonPortraitDialogue.Contains("Hiyo, poke.");
             }
 
@@ -172,7 +182,7 @@ namespace LiveSplit.StardewValley
                 CC_isWatchingJunimoGoodbye = false;
             }
 
-            //Log.Info(string.Format("[SDV]: CurrLoc:{0}\tIsCC:{1}\t[{2},{3},{4},{5}]", memory.CurrentLocationName, memory.IsCommunityCenter, CC_restoreAreaIndex, CC_restoreAreaPhase, CC_restoreAreaTimer, CC_isWatchingJunimoGoodbye));
+            //Log.Info($"[SDV] {CurrentLocationName} {CC_restoreAreaIndex},{CC_restoreAreaPhase},{CC_restoreAreaTimer},{CC_isWatchingJunimoGoodbye}");
             if (LastSplit != State.CurrentSplit.Name && !AlreadyRunSplits.Contains(State.CurrentSplit.Name))
             {
                 // implies that the CurrentSplit has changed and it's not already been checked
@@ -220,6 +230,8 @@ namespace LiveSplit.StardewValley
                     return JojaVendingMachine;
                 case SplitTrigger.HatMouse:
                     return HatMouse;
+                case SplitTrigger.FourCandles:
+                    return GrandpaScore == 4;
                 default:
                     return false;
             }

@@ -318,11 +318,9 @@ namespace LiveSplit.StardewValley
             memory.SetFootstepVolume(FootstepVolumeLevel);
             memory.SetAmbientVolume(AmbientVolumeLevel);
 
-            if (!(memory is MemoryModels.MemoryModel_5_5 || memory is MemoryModels.MemoryModel_5_6 || memory is MemoryModels.MemoryModel_5_6_x86))
-            {
-                if (UnbindEmoteButton) memory.UnbindEmoteButton();
-                if (UnbindChatButton) memory.UnbindChatButton();
-            }
+            if (UnbindEmoteButton) memory.UnbindEmoteButton();
+            if (UnbindChatButton) memory.UnbindChatButton();
+
             if (EnableZoomButton) memory.EnableZoomButton();
             if (AdvancedCrafting) memory.AdvancedCrafting();
             if (ToolHitButton) memory.ToolHitIndicator();
@@ -379,15 +377,3 @@ namespace LiveSplit.StardewValley
         }
     }
 }
-
-/*TODO
- * Convert Checkboxes to a ComboSelect with
- * - Manual
- * - On Day Start
- * - Reach Mines Floor
- * - Marriage
- * - Bundles
- * 
- * Input textbox for value
- * Combo select for bundles
- */

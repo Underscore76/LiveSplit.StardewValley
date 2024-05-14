@@ -144,15 +144,16 @@ namespace LiveSplit.StardewValley
         public virtual string CurrentLocationName => "";
         public virtual string ShopMenu_PersonPortraitDialogue => "";
         public virtual int DaysPlayed => -1;
-        public bool IsWeddingHearts => Event_IsWedding && Event_CurrentCommand > 22;
-        public bool JojaVendingMachine => Event_EventId == 502261 && Event_CurrentCommand > 21;
+        public virtual bool IsWeddingHearts => Event_IsWedding && Event_CurrentCommand > 22;
+        public virtual bool JojaVendingMachine => Event_EventId == "502261" && Event_CurrentCommand > 21;
         public virtual bool Event_IsWedding => false;
-        public virtual int Event_EventId => -1;
+        public virtual string Event_EventId => "-1";
         public virtual int Event_CurrentCommand => -1;
         public virtual bool CC_isWatchingJunimoGoodbye => false;
         public virtual int CC_restoreAreaIndex => -1;
         public virtual int CC_restoreAreaTimer => -1;
         public virtual int CC_restoreAreaPhase => -1;
+        public virtual int Farm_grandpaScore => 0;
 
         // Settings
         public virtual void SetMusicVolume(int level) { }

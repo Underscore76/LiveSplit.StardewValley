@@ -102,7 +102,7 @@ namespace LiveSplit.StardewValley.MemoryModels
         private readonly int[] Event_EventIdOffsets = { -440, 184, 152 };
         public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
         public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
-        public override int Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1);
+        public override string Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1).ToString();
 
         private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { -440, 324 };
         public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);
