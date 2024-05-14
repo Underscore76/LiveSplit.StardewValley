@@ -144,6 +144,10 @@ namespace LiveSplit.StardewValley
                             Memory = new MemoryModel_5_6_x86(Process);
                             break;
 
+                        case "1.6.3.24087":
+                            Log.Info("[SDV] Attached to version 1.6.3-steam");
+                            Memory = new MemoryModel_6_3(Process);
+                            break;
                     }
                     if (Memory == null)
                     {
@@ -161,7 +165,9 @@ namespace LiveSplit.StardewValley
 
         private bool IsLoading()
         {
-            //Log.Info(string.Format("[SDV] IsTitleMenu: {0}", Memory.IsTitleMenu));
+            // if someone reloads the title menu, we don't want to pause the timer
+            StartupTitleMenu &= Memory.IsTitleMenu;
+            //Log.Info(string.Format("[SDV] IsTitleMenu: {0} {1}", Memory.IsTitleMenu, StartupTitleMenu));
             //Log.Info(string.Format("[SDV] NeweDayTaskExists: {0}", Memory.NewDayTaskExists));
             //Log.Info(string.Format("[SDV] IsSaving: {0}", Memory.IsSaving));
             if (StartupTitleMenu) return true;

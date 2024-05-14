@@ -15,8 +15,8 @@ namespace MemoryHelper
             Process process = Process.GetProcesses().FirstOrDefault(p => p.ProcessName == "Stardew Valley" && !p.HasExited);
             if (process != null)
             {
-                DataTarget dataTarget = DataTarget.AttachToProcess(process.Id, 0, AttachFlag.Passive);
-                if (dataTarget == null || dataTarget.ClrVersions.Count == 0)
+                DataTarget dataTarget = DataTarget.AttachToProcess(process.Id, false);
+                if (dataTarget == null || dataTarget.ClrVersions.Count() == 0)
                 {
                     return null;
                 }

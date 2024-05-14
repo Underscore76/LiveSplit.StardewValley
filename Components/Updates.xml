@@ -14,6 +14,14 @@
       </changelog>
     </files>
   </update>
+  <update version="1.2.6">
+    <files>
+      <file path="Components/LiveSplit.StardewValley.dll" status="changed"/>
+    </files>
+    <changelog>
+      <change>Added support for v1.6.3</change>
+    </changelog>
+  </update>
   <update version="1.2.5">
     <files>
       <file path="Components/LiveSplit.StardewValley.dll" status="changed"/>
