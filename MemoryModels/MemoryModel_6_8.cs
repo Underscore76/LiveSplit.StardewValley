@@ -1,58 +1,59 @@
-﻿using System;
+﻿using LiveSplit.Options;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace LiveSplit.StardewValley.MemoryModels
 {
-    public class MemoryModel_5_6 : MemoryModel
+    public class MemoryModel_6_8 : MemoryModel
     {
         private static readonly string CodeSignature = RemoveWhitespace( // Game1::setGameMode
-                    "48 B8 vvvvvvvvvvvvvvvv", // _gameMode = mode
-                    "40 88 30",
-                    // if (temporaryContent != null) {
-                    "E8 ????????", // Game1::get_temporaryContent()
-                    "48 85 C0", // (temporaryContent == null)
-                    "74 12", // if above check true, jump
-                             // unload
-                    "E8 ????????", // Game1::get_temporaryContent()
-                    "48 8B C8",
-                    "48 8B 00",
-                    "48 8B 40 48",
-                    "FF 50 20",// temporaryContent.Unload()
-
-                    // } ENDIF
-                    // switch(mode)
-                    //  case 0 : jump to label 0x6D 
-                    "85 DB",
+                    "85 DB", // switch mode
                     "74 11",
-                    // case 3: jump to label 0x128 (not here)
                     "83 FB 03",
-                    "0F84 ????????",
-                    //// otherwise return
+                    "0F84 AD000000",
                     "48 83 C4 20",
                     "5B",
                     "5E",
                     "5F",
                     "C3",
-                    // label 0x6D
-                    "33 F6", // flag = false
-                    "48 B9 pppppppppppppppp", // the pointer to Game1._activeClickableMenu
-                    "48 83 39 00" // check it's not null
+                    "33 F6",
+                    "48 B9 pppppppppppppppp", // the pointer Game1.activeClickableMenu
+                    "48 83 39 00", // the check that the value inside the ptr is not null
+                    "74 3E", // jump when null
+                    "48 B9 vvvvvvvvvvvvvvvv", // Game1.currentGameTime
+                    "48 8B 09",
+                    "48 85 C9",
+                    "74 2C",
+                    "48 8B 49 10",
+                    "C5F857C0",
+                    "C4E1FB2AC1",
+                    "C5FB5E05 89 000000",
+                    "C5F92E05 89 000000",
+                    "0F97 C1",
+                    "0FB6 C9",
+                    "85 C9",
+                    "74 05",
+                    "BE 01000000"
                     );
-        public MemoryModel_5_6(Process process) : base(process, CodeSignature) { }
-
+        public MemoryModel_6_8(Process process) : base(process, CodeSignature) {
+        }
         // netWorldState.(value as NetWorldState).isPaused.value]
-        private readonly int[] PausedOffsets = { 208, 64, 136, 69 };
+        private readonly int[] PausedOffsets = { 216, 72, 136, 77 };
         public override bool IsPaused => ReadValue<bool>(PausedOffsets);
 
         // game1._isSaving
-        private readonly int[] SavingOffsets = { 184, 182 };
+        private readonly int[] SavingOffsets = { 184, 169 };
         public override bool IsSaving => ReadValue<bool>(SavingOffsets);
 
         // graphics.inDeviceTransition
         public override bool IsConstructingGraphics => false; // Failed to find in MonoGame framework
 
         // Game1._newDayTask
-        private readonly int[] NewDayTaskOffsets = { 264 };
+        private readonly int[] NewDayTaskOffsets = { 272 };
         public override bool NewDayTaskExists => ReadValue<IntPtr>(NewDayTaskOffsets) != IntPtr.Zero;
 
         // (Game1.activeClickableMenu as TitleMenu).StartupMessageColor
@@ -89,11 +90,11 @@ namespace LiveSplit.StardewValley.MemoryModels
         public override void UnbindChatButton() {}
 
         // Game1.options.enableZoom
-        private readonly int[] EnableZoomOffsets = { 184, 80, 319 };
+        private readonly int[] EnableZoomOffsets = { 184, 80, 318 };
         public override void EnableZoomButton() { WriteValue<bool>(EnableZoomOffsets, true); }
 
         // Game1.options.showAdvancedCraftingInformation
-        private readonly int[] AdvancedCraftingOffsets = { 184, 80, 324 };
+        private readonly int[] AdvancedCraftingOffsets = { 184, 80, 323 };
         public override void AdvancedCrafting() { WriteValue<bool>(AdvancedCraftingOffsets, true); }
 
         // Game1.options.alwaysShowToolHitLocation
@@ -101,49 +102,50 @@ namespace LiveSplit.StardewValley.MemoryModels
         public override void ToolHitIndicator() { WriteValue<bool>(ToolHitOffsets, true); }
 
         // Game1.options.useLegacySlingshotFiring
-        private readonly int[] SlingshotModeOffset = { 184, 80, 334 };
+        private readonly int[] SlingshotModeOffset = { 184, 80, 336 };
         public override void SlingshotMode(bool legacy) { WriteValue<bool>(SlingshotModeOffset, legacy); }
 
-        private readonly int[] CurrentLocationNameOffsets = { 184, 32, 272, 64 };
+
+        private readonly int[] CurrentLocationNameOffsets = { 184, 32, 360, 72 };
         public override string CurrentLocationName => ReadString(CurrentLocationNameOffsets, "", 8);
 
-        private readonly int[] DaysPlayedOffsets = { -928, 496, 184 };
-        public override int DaysPlayed => (int)ReadValue<UInt32>(DaysPlayedOffsets);
+        private readonly int[] DaysPlayedOffsets = { 216, 72, 120, 76 };
+        public override int DaysPlayed => ReadValue<int>(DaysPlayedOffsets, -1);
 
-        private readonly int[] Event_IsWeddingOffsets = { 184, 32, 400, 300 };
-        private readonly int[] Event_CurrentCommandOffsets = { 184, 32, 400, 232 };
-        private readonly int[] Event_EventIdOffsets = { 184, 32, 400, 264 };
+        private readonly int[] Event_IsWeddingOffsets = { 184, 32, 480, 305 };
+        private readonly int[] Event_CurrentCommandOffsets = { 184, 32, 480, 264 };
+        private readonly int[] Event_EventIdOffsets = { 184, 32, 480, 16 };
         public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
         public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
-        public override string Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1).ToString();
+        public override string Event_EventId => ReadString(Event_EventIdOffsets, "-1", 8);
 
-        private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { 184, 32, 680 };
+        private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { 184, 32, 844 };
         public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);
 
-        private readonly int[] CommunityCenter_restoreAreaPhaseOffsets = { 184, 32, 684 };
+        private readonly int[] CommunityCenter_restoreAreaPhaseOffsets = { 184, 32, 848 };
         public override int CC_restoreAreaPhase => ReadValue<int>(CommunityCenter_restoreAreaPhaseOffsets);
 
-        private readonly int[] CommunityCenter_restoreAreaIndexOffsets = { 184, 32, 688 };
+        private readonly int[] CommunityCenter_restoreAreaIndexOffsets = { 184, 32, 852 };
         public override int CC_restoreAreaIndex => ReadValue<int>(CommunityCenter_restoreAreaIndexOffsets);
 
-        private readonly int[] CommunityCenter_isWatchingJunimoGoodbyeOffsets = { 184, 32, 692 };
+        private readonly int[] CommunityCenter_isWatchingJunimoGoodbyeOffsets = { 184, 32, 856 };
         public override bool CC_isWatchingJunimoGoodbye => ReadValue<bool>(CommunityCenter_isWatchingJunimoGoodbyeOffsets);
 
-        private readonly int[] ShopMenu_PPDOffsets = { 0, 264 };
+        private readonly int[] ShopMenu_PPDOffsets = { 0, 272 };
         public override string ShopMenu_PersonPortraitDialogue => ReadString(ShopMenu_PPDOffsets, "", 8);
+
+        private readonly int[] Farm_grandpaScoreOffsets = { 184, 32, 728, 76 };
+        public override int Farm_grandpaScore => ReadValue<int>(Farm_grandpaScoreOffsets, 0);
     }
 }
 
-//}
-
 /*
-Scanning for Stardew Valley...
-Attaching to version 1.5.6-steam ( 1.5.6.21356 )...
+Attaching to version 1.6.8-steam ( 1.6.8.24119 )...
 Computing field offsets...
-IsPaused : ReadValue<Boolean>( 208, 64, 136, 69 )
-IsSaving : ReadValue<Boolean>( 184, 182 )
+IsPaused : ReadValue<Boolean>( 216, 72, 136, 77 )
+IsSaving : ReadValue<Boolean>( 184, 169 )
 IsConstructingGraphics : Failed to find field inDeviceTransition in type Microsoft.Xna.Framework.GraphicsDeviceManager
-NewDayTask : ReadPointer( 264 )
+NewDayTask : ReadPointer( 272 )
 ActiveClickableMenu : ReadPointer( 0 )
 TitleMenu_StartupMessageColor : ReadValue<Int32>( 0, 456 )
 Options.MusicVolume : ReadValue<Single>( 184, 80, 240 )
@@ -152,8 +154,19 @@ Options.ambientVolumeLevel : ReadValue<Single>( 184, 80, 252 )
 Options.footstepVolumeLevel : ReadValue<Single>( 184, 80, 248 )
 Options.emoteButton : ReadPointer( 184, 80, 216 )
 Optiions.ChatButtons : ReadPointer( 184, 80, 88 )
-Options.EnableZoom : ReadValue<Boolean>( 184, 80, 319 )
+Options.EnableZoom : ReadValue<Boolean>( 184, 80, 318 )
 Options.ToolHit : ReadValue<Boolean>( 184, 80, 310 )
-Options.AdvancedCraftnig : ReadValue<Boolean>( 184, 80, 324 )
-Options.LegacySlingshot : ReadValue<Boolean>( 184, 80, 334 )
-*/
+Options.AdvancedCraftnig : ReadValue<Boolean>( 184, 80, 323 )
+Options.LegacySlingshot : ReadValue<Boolean>( 184, 80, 336 )
+currentLocation.Name : ReadString( 184, 32, 360, 72, 0 )
+DaysPlayed : ReadValue<Int32>( 216, 72, 120, 76 )
+CurrentEvent.IsWedding : ReadValue<Boolean>( 184, 32, 480, 305 )
+CurrentEvent.currentCommand : ReadValue<Int32>( 184, 32, 480, 264 )
+CurrentEvent.id : ReadValue<Int32>( 184, 32, 480, 16 )
+CommunityCenter.restoreAreaIndex : ReadValue<Int32>( 184, 32, 852 )
+CommunityCenter.restoreAreaPhase : ReadValue<Int32>( 184, 32, 848 )
+CommunityCenter.restoreAreaTimer : ReadValue<Int32>( 184, 32, 844 )
+CommunityCenter._isWatchingJunimoGoodbye : ReadValue<Boolean>( 184, 32, 856 )
+ShopMenu.potraitPersonDialogue : ReadString( 0, 272, 0 )
+Farm.grandpaScore.Value : ReadValue<Int32>( 184, 32, 728, 76 )
+ */

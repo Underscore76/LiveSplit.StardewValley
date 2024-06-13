@@ -32,11 +32,12 @@ namespace MemoryHelper
         {
             Process = process;
             Runtime = dataTarget.ClrVersions[0].CreateRuntime();
+            Debug.WriteLine(Process.Is64Bit());
         }
 
         public bool HasExited => Process.HasExited;
 
-        public string FileVersion => Process.MainModule.FileVersionInfo.FileVersion;
+        public string FileVersion => Process.MainModule.FileVersionInfo.FileVersion + (Process.Is64Bit() ? "": "_x86");
 
         public static readonly int ObjectHeaderSize = IntPtr.Size;
 

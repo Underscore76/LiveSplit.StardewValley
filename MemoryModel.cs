@@ -94,15 +94,19 @@ namespace LiveSplit.StardewValley
             return defaultValue;
         }
 
-        public string ReadString(int[] offsets, string defaultValue = null)
+        public string ReadString(int[] offsets, string defaultValue = null, int ptrWidth = 4)
         {
-            if (TryReadOffsets(false, offsets, out var address) &&
-                Process.ReadPointer(address, out address) &&
-                Process.ReadValue<int>(address + 4, out var len) &&
-                Process.ReadBytes(address + 8, len * 2, out var bytes))
+            try
             {
-                return Encoding.Unicode.GetString(bytes);
+                if (TryReadOffsets(false, offsets, out var address) &&
+                    Process.ReadPointer(address, out address) &&
+                    Process.ReadValue<int>(address + ptrWidth, out var len) &&
+                    Process.ReadBytes(address + ptrWidth + 4, len * 2, out var bytes))
+                {
+                    return Encoding.Unicode.GetString(bytes);
+                }
             }
+            catch { }
             return defaultValue;
         }
 
@@ -128,23 +132,40 @@ namespace LiveSplit.StardewValley
             return true;
         }
         // used in determining runtime
-        public abstract bool IsPaused { get; }
-        public abstract bool IsSaving { get; }
-        public abstract bool IsConstructingGraphics { get; }
-        public abstract bool NewDayTaskExists { get; }
-        public abstract bool IsTitleMenu { get; }
+        public virtual bool IsPaused => false;
+        public virtual bool IsSaving => false;
+        public virtual bool IsConstructingGraphics => false;
+        public virtual bool NewDayTaskExists => false;
+        public virtual bool IsTitleMenu => false;
         protected readonly uint TitleMenu_DeepSkyBlue = 4294950656;
+
+        // split hook data
+        // Game1.stats.DaysPlayed
+        public virtual string CurrentLocationName => "";
+        public virtual string ShopMenu_PersonPortraitDialogue => "";
+        public virtual int DaysPlayed => -1;
+        public virtual bool IsWeddingHearts => Event_IsWedding && Event_CurrentCommand > 22;
+        public virtual bool JojaVendingMachine => Event_EventId == "502261" && Event_CurrentCommand > 21;
+        public virtual bool Event_IsWedding => false;
+        public virtual string Event_EventId => "-1";
+        public virtual int Event_CurrentCommand => -1;
+        public virtual bool CC_isWatchingJunimoGoodbye => false;
+        public virtual int CC_restoreAreaIndex => -1;
+        public virtual int CC_restoreAreaTimer => -1;
+        public virtual int CC_restoreAreaPhase => -1;
+        public virtual int Farm_grandpaScore => 0;
+
         // Settings
-        public abstract void SetMusicVolume(int level);
-        public abstract void SetSoundVolume(int level);
-        public abstract void SetFootstepVolume(int level);
-        public abstract void SetAmbientVolume(int level);
+        public virtual void SetMusicVolume(int level) { }
+        public virtual void SetSoundVolume(int level) { }
+        public virtual void SetFootstepVolume(int level) { }
+        public virtual void SetAmbientVolume(int level) { }
         public readonly int AttentionKey = 246;
-        public abstract void UnbindEmoteButton();
-        public abstract void UnbindChatButton();
-        public abstract void EnableZoomButton();
-        public abstract void AdvancedCrafting();
-        public abstract void ToolHitIndicator();
-        public abstract void SlingshotMode(bool legacy);
+        public virtual void UnbindEmoteButton() { }
+        public virtual void UnbindChatButton() { }
+        public virtual void EnableZoomButton() { }
+        public virtual void AdvancedCrafting() { }
+        public virtual void ToolHitIndicator() { }
+        public virtual void SlingshotMode(bool legacy) { }
     }
 }

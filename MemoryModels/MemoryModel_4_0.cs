@@ -90,5 +90,33 @@ namespace LiveSplit.StardewValley.MemoryModels
         // not avalable in v1.4
         public override void SlingshotMode(bool legacy) { }
 
+
+        private readonly int[] CurrentLocationNameOffsets = { -440, 124, 36 };
+        public override string CurrentLocationName => ReadString(CurrentLocationNameOffsets, "", 4);
+
+        private readonly int[] DaysPlayedOffsets = { -464, 280, 172 };
+        public override int DaysPlayed => (int)ReadValue<UInt32>(DaysPlayedOffsets);
+
+        private readonly int[] Event_IsWeddingOffsets = { -440, 184, 191 };
+        private readonly int[] Event_CurrentCommandOffsets = { -440, 184, 120 };
+        private readonly int[] Event_EventIdOffsets = { -440, 184, 152 };
+        public override bool Event_IsWedding => ReadValue<bool>(Event_IsWeddingOffsets, false);
+        public override int Event_CurrentCommand => ReadValue<int>(Event_CurrentCommandOffsets, -1);
+        public override string Event_EventId => ReadValue<int>(Event_EventIdOffsets, -1).ToString();
+
+        private readonly int[] CommunityCenter_restoreAreaTimerOffsets = { -440, 324 };
+        public override int CC_restoreAreaTimer => ReadValue<int>(CommunityCenter_restoreAreaTimerOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaPhaseOffsets = { -440, 328 };
+        public override int CC_restoreAreaPhase => ReadValue<int>(CommunityCenter_restoreAreaPhaseOffsets);
+
+        private readonly int[] CommunityCenter_restoreAreaIndexOffsets = { -440, 332 };
+        public override int CC_restoreAreaIndex => ReadValue<int>(CommunityCenter_restoreAreaIndexOffsets);
+
+        private readonly int[] CommunityCenter_isWatchingJunimoGoodbyeOffsets = { -440, 336 };
+        public override bool CC_isWatchingJunimoGoodbye => ReadValue<bool>(CommunityCenter_isWatchingJunimoGoodbyeOffsets);
+
+        private readonly int[] ShopMenu_PPDOffsets = { 0, 132 };
+        public override string ShopMenu_PersonPortraitDialogue => ReadString(ShopMenu_PPDOffsets, "", 4);
     }
 }

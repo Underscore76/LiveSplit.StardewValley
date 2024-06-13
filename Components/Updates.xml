@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <updates>
+  <update version="1.3.0">
+    <files>
+      <file path="Components/LiveSplit.StardewValley.dll" statuc="changed"/>
+      <changelog>
+        <change>Added Splits tab to settings for autosplits</change>
+        <change>Added auto start on OK click</change>
+        <change>Added ability to tie triggers to specific splits</change>
+        <change>Added support for v1.5.6Hotfix#3 (current patch)</change>
+        <change>Added support for v1.5.6-Compatability Patch</change>
+        <change>Added support for v1.4.0</change>
+        <change>HatMouse currently only supported in English (looking to expand)</change>
+      </changelog>
+    </files>
+  </update>
   <update version="1.2.6">
     <files>
       <file path="Components/LiveSplit.StardewValley.dll" status="changed"/>
