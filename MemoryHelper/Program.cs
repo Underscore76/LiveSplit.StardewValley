@@ -1,4 +1,5 @@
-﻿using Microsoft.Diagnostics.Runtime;
+﻿using MemoryHelper.Models;
+using Microsoft.Diagnostics.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,11 +19,13 @@ namespace MemoryHelper
             ["1.3.7853.31734"] = MemoryModel.V5("1.5.4-steam"),
             ["1.3.37.0"] = MemoryModel.V5_5("1.5.5-steam"),
             ["1.5.6.21356"] = MemoryModel.V5_5("1.5.6-steam"),
-            ["1.5.6.22018"] = MemoryModel.V5_6("1.5.6-steam"),
+            [SDV1_5_6.SemVer] = SDV1_5_6.Get(),
             ["1.3.8053.40424_x86"] = MemoryModel.V5_6_x86("1.5.6-steam-compart"),
             ["1.6.3.24087"] = MemoryModel.V6_3("1.6.3-steam"),
             ["1.6.8.24119_x86"] = MemoryModel.V6_8_x86("1.6.8-steam-compat"),
             ["1.6.8.24119"] = MemoryModel.V6_8("1.6.8-steam"),
+            [SDV1_6_14.SemVer] = SDV1_6_14.Get(),
+            [SDV1_6_15.SemVer] = SDV1_6_15.Get(),
         };
 
         public static void Main(string[] args)

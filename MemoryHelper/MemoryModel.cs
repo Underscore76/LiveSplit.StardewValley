@@ -20,7 +20,7 @@ namespace MemoryHelper
             Fields = new Dictionary<string, MemoryFinder>();
         }
 
-        protected static string RemoveWhitespace(params string[] str)
+        public static string RemoveWhitespace(params string[] str)
         {
             return string.Concat(str).Replace(" ", "");
         }
@@ -1137,7 +1137,7 @@ StardewValley.Game1::setGameMode+149- CC                    - int 3
                 .GetField("instanceOptions")
                 .GetField("useLegacySlingshotFiring")
                 .GetValue<bool>();
-            
+
             model.Fields["currentLocation.Name"] = MemoryFinder
                 .GetStaticField("game1")
                 .GetField("instanceGameLocation")
@@ -1211,8 +1211,8 @@ StardewValley.Game1::setGameMode+149- CC                    - int 3
                 .GetValue<int>();
             return model;
         }
-        
-        
+
+
         public static MemoryModel V6_8(string gameVersion)
         {
             MemoryModel model = new MemoryModel(
@@ -1916,43 +1916,3 @@ StardewValley.Game1::setGameMode+118- C3                    - ret
     }
 }
 
-/*
- * 
- * 
-
-
-"48 B8 vvvvvvvvvvvvvvvv", // _gameMode = mode
-                    "40 88 30",
-                    // if (temporaryContent != null) {
-                    "E8 ????????", // Game1::get_temporaryContent()
-                    "48 85 C0", // (temporaryContent == null)
-                    "74 12", // if above check true, jump
-                             // unload
-                    "E8 ????????", // Game1::get_temporaryContent()
-                    "48 8B C8",
-                    "48 8B 00",
-                    "48 8B 40 48",
-                    "FF 50 20",// temporaryContent.Unload()
-
-                    // } ENDIF
-                    // switch(mode)
-                    //  case 0 : jump to label 0x6D 
-                    "85 DB",
-                    "74 11",
-                    // case 3: jump to label 0x128 (not here)
-                    "83 FB 03",
-                    "0F84 ????????",
-                    //// otherwise return
-                    "48 83 C4 20",
-                    "5B",
-                    "5E",
-                    "5F",
-                    "C3",
-                    // label 0x6D
-                    "33 F6", // flag = false
-                    "48 B9 pppppppppppppppp", // the pointer to Game1._activeClickableMenu
-                    "48 83 39 00" // check it's not null
-                    )
- * 
- * 
- */

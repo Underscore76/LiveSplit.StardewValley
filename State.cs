@@ -159,6 +159,14 @@ namespace LiveSplit.StardewValley
                                 Memory = new MemoryModel_6_8_x86(Process);
                             }
                             break;
+                        case "1.6.14.24317":
+                            Log.Info("[SDV] Attached to version 1.6.14-steam");
+                            Memory = new MemoryModel_6_14(Process);
+                            break;
+                        case "1.6.15.24356":
+                            Log.Info("[SDV] Attached to version 1.6.15-steam");
+                            Memory = new MemoryModel_6_15(Process);
+                            break;
                     }
                     if (Memory == null)
                     {

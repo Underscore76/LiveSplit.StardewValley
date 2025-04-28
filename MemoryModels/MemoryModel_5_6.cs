@@ -131,6 +131,9 @@ namespace LiveSplit.StardewValley.MemoryModels
 
         private readonly int[] ShopMenu_PPDOffsets = { 0, 264 };
         public override string ShopMenu_PersonPortraitDialogue => ReadString(ShopMenu_PPDOffsets, "", 8);
+
+        private readonly int[] Farm_grandpaScoreOffsets = { 184, 32, 592, 68 };
+        public override int Farm_grandpaScore => ReadValue<int>(Farm_grandpaScoreOffsets, 0);
     }
 }
 
