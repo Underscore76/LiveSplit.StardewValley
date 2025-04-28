@@ -84,5 +84,8 @@ namespace LiveSplit.StardewValley.MemoryModels
         public override void SlingshotMode(bool legacy) { }
         public override void AdvancedCrafting() { }
         public override void UnbindEmoteButton() { }
+
+        public override int DaysPlayed => 0;
+        public override string CurrentLocationName => "";
     }
 }

@@ -90,5 +90,8 @@ namespace LiveSplit.StardewValley.MemoryModels
         // not avalable in v1.4
         public override void SlingshotMode(bool legacy) { }
 
+
+        public override int DaysPlayed => 0;
+        public override string CurrentLocationName => "";
     }
 }

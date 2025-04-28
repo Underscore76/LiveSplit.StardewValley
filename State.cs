@@ -11,19 +11,21 @@ namespace LiveSplit.StardewValley
     public class State
     {
         public Settings Settings;
-
+        public SplitState SplitState;
         private const int ProcessScanInterval = 1000;
         private Stopwatch Stopwatch;
         private Process Process;
         private MemoryModel Memory;
 
         private TimerModel Timer;
+        private bool WasStartupTitleMenu;
         private bool StartupTitleMenu;
         private bool NeedsOverride;
 
         public State(LiveSplitState state)
         {
-            Settings = new Settings();
+            SplitState = new SplitState(state);
+            Settings = new Settings(SplitState);
             Stopwatch = Stopwatch.StartNew();
             Process = null;
             Memory = null;
@@ -37,6 +39,7 @@ namespace LiveSplit.StardewValley
             Log.Info("[SDV] timer started");
             StartupTitleMenu = Memory.IsTitleMenu;
             NeedsOverride = Settings.EnableSettingsOverride;
+            SplitState.Reset();
         }
 
         public void Update()
@@ -47,12 +50,23 @@ namespace LiveSplit.StardewValley
             {
                 return;
             }
+
+            // track that the title menu state changed
+            WasStartupTitleMenu = StartupTitleMenu;
+            // if someone reloads the title menu, don't want to pause the timer
+            StartupTitleMenu &= Memory.IsTitleMenu;
+
             switch (Timer.CurrentState.CurrentPhase)
             {
                 case TimerPhase.NotRunning:
                     if (ShouldStart())
                     {
                         Timer.Start();
+                        OverrideSettings();
+                    }
+                    else
+                    {
+                        StartupTitleMenu = Memory.IsTitleMenu;
                     }
                     break;
                 case TimerPhase.Running:
@@ -61,7 +75,7 @@ namespace LiveSplit.StardewValley
                     {
                         Timer.Reset();
                     }
-                    else if (ShouldSplit())
+                    else if (ShouldSplit(Memory))
                     {
                         Timer.Split();
                     }
@@ -125,9 +139,33 @@ namespace LiveSplit.StardewValley
                             Log.Info("[SDV] Attached to version 1.5.6-steam");
                             Memory = new MemoryModel_5_6(Process);
                             break;
+                        case "1.3.8053.40424":
+                            Log.Info("[SDV] Attached to version 1.5.6-steam-COMPAT");
+                            Memory = new MemoryModel_5_6_x86(Process);
+                            break;
+
                         case "1.6.3.24087":
                             Log.Info("[SDV] Attached to version 1.6.3-steam");
                             Memory = new MemoryModel_6_3(Process);
+                            break;
+                        case "1.6.8.24119":
+                            if (Process.Is64Bit())
+                            {
+                                Log.Info("[SDV] Attached to version 1.6.8-steam");
+                                Memory = new MemoryModel_6_8(Process);
+                            } else
+                            {
+                                Log.Info("[SDV] Attached to version 1.6.8-steam-compat");
+                                Memory = new MemoryModel_6_8_x86(Process);
+                            }
+                            break;
+                        case "1.6.14.24317":
+                            Log.Info("[SDV] Attached to version 1.6.14-steam");
+                            Memory = new MemoryModel_6_14(Process);
+                            break;
+                        case "1.6.15.24356":
+                            Log.Info("[SDV] Attached to version 1.6.15-steam");
+                            Memory = new MemoryModel_6_15(Process);
                             break;
                     }
                     if (Memory == null)
@@ -161,22 +199,18 @@ namespace LiveSplit.StardewValley
 
         private bool ShouldStart()
         {
-            // not sure yet how to detect being in the new game menu
-
+            if (!Settings.StartOnOk) return false;
+            if (WasStartupTitleMenu) return !StartupTitleMenu;
             return false;
         }
 
-        private bool ShouldSplit()
+        private bool ShouldSplit(MemoryModel memory)
         {
-            // nothing yet as i am not sure how to get/parse split data
-
-            return false;
+            return Settings.UseAutosplit && SplitState.ShouldSplit(memory);
         }
 
         private bool ShouldReset()
         {
-            // not sure yet how to detect being in the new game menu
-
             return false;
         }
 
