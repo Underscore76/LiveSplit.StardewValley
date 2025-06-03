@@ -31,6 +31,7 @@ namespace LiveSplit.StardewValley
             Memory = null;
             Timer = new TimerModel() { CurrentState = state };
             state.OnStart += OnStart;
+            state.OnReset += OnReset;
         }
 
         private void OnStart(object sender, EventArgs e)
@@ -39,6 +40,12 @@ namespace LiveSplit.StardewValley
             Log.Info("[SDV] timer started");
             StartupTitleMenu = Memory.IsTitleMenu;
             NeedsOverride = Settings.EnableSettingsOverride;
+            SplitState.Reset();
+        }
+
+        private void OnReset(object sender, TimerPhase e)
+        {
+            Log.Info("[SDV] reseting timer");
             SplitState.Reset();
         }
 
