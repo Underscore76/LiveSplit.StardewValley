@@ -171,6 +171,7 @@
     <Compile Include="MemoryScanner.cs" />
     <Compile Include="MemoryFinder.cs" />
     <Compile Include="Models\SDV1_5_6.cs" />
+    <Compile Include="Models\SDV1_6_0.cs" />
     <Compile Include="Models\SDV1_6_14.cs" />
     <Compile Include="Models\SDV1_6_15.cs" />
     <Compile Include="Program.cs" />

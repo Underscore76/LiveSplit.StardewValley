@@ -21,6 +21,7 @@ namespace MemoryHelper
             ["1.5.6.21356"] = MemoryModel.V5_5("1.5.6-steam"),
             [SDV1_5_6.SemVer] = SDV1_5_6.Get(),
             ["1.3.8053.40424_x86"] = MemoryModel.V5_6_x86("1.5.6-steam-compart"),
+            [SDV1_6_0.SemVer] = SDV1_6_0.Get(),
             ["1.6.3.24087"] = MemoryModel.V6_3("1.6.3-steam"),
             ["1.6.8.24119_x86"] = MemoryModel.V6_8_x86("1.6.8-steam-compat"),
             ["1.6.8.24119"] = MemoryModel.V6_8("1.6.8-steam"),
@@ -34,17 +35,17 @@ namespace MemoryHelper
             if (!program.TryAttach())
                 return;
 
-            Debug.WriteLine("Computing field offsets...");
+            Console.WriteLine("Computing field offsets...");
             foreach (var entry in program.Model.Fields)
             {
                 Int64[] offsets = entry.Value.FindOffsets(program, out var failure);
                 if (offsets == null)
                 {
-                    Debug.WriteLine(entry.Key + " : " + failure);
+                    Console.WriteLine(entry.Key + " : " + failure);
                 }
                 else
                 {
-                    Debug.WriteLine(entry.Key + " : " + entry.Value.ReadMethod + "( " + string.Join(", ", offsets) + " )");
+                    Console.WriteLine(entry.Key + " : " + entry.Value.ReadMethod + "( " + string.Join(", ", offsets) + " )");
                 }
             }
         }
@@ -57,26 +58,26 @@ namespace MemoryHelper
 
         public bool TryAttach()
         {
-            Debug.WriteLine("Scanning for Stardew Valley...");
+            Console.WriteLine("Scanning for Stardew Valley...");
 
             while ((Scanner = MemoryScanner.TryAttach()) == null)
             {
                 Thread.Sleep(1000);
             }
-
+            Console.WriteLine("FileVersion " + Scanner.FileVersion);
             Model = Models[Scanner.FileVersion];
             if (Model == null)
             {
-                Debug.WriteLine("Unknwon FileVersion " + Scanner.FileVersion);
+                Console.WriteLine("Unknwon FileVersion " + Scanner.FileVersion);
                 return false;
             }
 
-            Debug.WriteLine("Attaching to version " + Model.GameVersion + " ( " + Scanner.FileVersion + " )...");
+            Console.WriteLine("Attaching to version " + Model.GameVersion + " ( " + Scanner.FileVersion + " )...");
 
             Game1 = Scanner.GetTypeByName("StardewValley.Game1");
             if (Game1 == null)
             {
-                Debug.WriteLine("Failed to find Game1");
+                Console.WriteLine("Failed to find Game1");
                 return false;
             }
 
@@ -86,7 +87,7 @@ namespace MemoryHelper
             ClrStaticField signaturePointer = Game1.GetStaticFieldByName(Model.SignaturePointer);
             if (signatureValue == null)
             {
-                Debug.WriteLine("Failed to find signature value " + Model.SignatureValue);
+                Console.WriteLine("Failed to find signature value " + Model.SignatureValue);
             }
             //else if (!signatureValue.IsPrimitive)
             //{
@@ -97,23 +98,23 @@ namespace MemoryHelper
                 SignatureValueAddress = Scanner.GetAddress(signatureValue);
                 if (SignatureValueAddress == IntPtr.Zero)
                 {
-                    Debug.WriteLine("Failed to find signature value address for " + Model.SignatureValue);
+                    Console.WriteLine("Failed to find signature value address for " + Model.SignatureValue);
                 }
             }
             if (signaturePointer == null)
             {
-                Debug.WriteLine("Unable to find signature pointer " + Model.SignaturePointer);
+                Console.WriteLine("Unable to find signature pointer " + Model.SignaturePointer);
             }
             else if (signaturePointer.IsPrimitive)
             {
-                Debug.WriteLine("Signature " + Model.SignaturePointer + " is not a pointer");
+                Console.WriteLine("Signature " + Model.SignaturePointer + " is not a pointer");
             }
             else
             {
                 SignaturePointerAddress = Scanner.GetAddress(signaturePointer);
                 if (SignaturePointerAddress == IntPtr.Zero)
                 {
-                    Debug.WriteLine("Failed to find signature pointer address for " + Model.SignaturePointer);
+                    Console.WriteLine("Failed to find signature pointer address for " + Model.SignaturePointer);
                 }
             }
             if (SignatureValueAddress == IntPtr.Zero || SignaturePointerAddress == IntPtr.Zero)
@@ -121,7 +122,7 @@ namespace MemoryHelper
                 return false;
             }
             Console.WriteLine($"{SignaturePointerAddress.ToString("x")} {SignatureValueAddress.ToString("x")}");
-            return true;
+            // return true;
             int valueIndex = Model.CodeSignature.IndexOf('v') / 2;
             int pointerIndex = Model.CodeSignature.IndexOf('p') / 2;
             int hits = 0;
@@ -137,12 +138,12 @@ namespace MemoryHelper
             }
             if (hits == 0)
             {
-                Debug.WriteLine("Failed to find the CodeSignature");
+                Console.WriteLine("Failed to find the CodeSignature");
                 return false;
             }
             else if (hits != 1 || correct != 1)
             {
-                Debug.WriteLine("The CodeSignature is not unique, it was found " + hits + " times, of which " + correct + " where correct");
+                Console.WriteLine("The CodeSignature is not unique, it was found " + hits + " times, of which " + correct + " where correct");
                 return false;
             }
 

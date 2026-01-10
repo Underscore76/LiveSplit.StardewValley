@@ -14,17 +14,6 @@ A LiveSplit autosplitter component for Stardew Valley
 * [X] Automatically stop the timer at run end
 * [ ] Automatically reset the timer when starting a new run
 
-### Version Support
-
-* [x] Support for version 1.5.4
-* [x] Support for version 1.4.0
-* [x] Support for version 1.3.36
-* [x] Support for version 1.2.33
-* [ ] Support for version 1.11
-* [ ] Support for version 1.07
-* [x] Support for Steam
-* [ ] Support for other vendors (GOG)
-
 ## Installing
 
 * Copy Components/LiveSplit.StardewValley.dll into the Components folder in LiveSplit
@@ -40,6 +29,8 @@ A LiveSplit autosplitter component for Stardew Valley
 
 ## AutoSplit Support Table
 
+All listed versions in this table should be supported by the load remover. Autosplit specific functionality should match the following table:
+
 |Version | DayStart | DayEnd | MinesFloor | Marriage | Bundles | CC | Joja | HatMouse | FourCandles |
 |--|--|--|--|--|--|--|--|--|--|
 | 1.2.33 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -50,6 +41,7 @@ A LiveSplit autosplitter component for Stardew Valley
 | 1.5.5 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
 | 1.5.6 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 1.5.6-compat | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| 1.6.0 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 1.6.3 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 1.6.8 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 1.6.8-compat | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
